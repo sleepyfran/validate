@@ -1,2 +1,2 @@
-# validate
-☑️ A simple fluent validation library for TypeScript
+# ☑️ validate
+A simple fluent validation library for TypeScript
