@@ -10,7 +10,7 @@ export default interface ValidationOf<T> {
      * property.
      * @param property Property to apply the following validations.
      */
-    with(property: keyof T): ValidationWith<T>
+    with<K extends keyof T>(property: K): ValidationWith<T[K]>
 
     /**
      * Apply the validation only if the given condition is met. Calling this
