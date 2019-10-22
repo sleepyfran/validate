@@ -13,6 +13,23 @@ export interface ValidationError<T> {
  */
 export interface Result<T> {
     /**
+     * Combines the current result with another one. This only combines error
+     * validation states and returns whatever object was given to the parameter's
+     * result.
+     *
+     * @param result Result to combine with the current one.
+     */
+    combineWith<U>(result: Result<U>): Result<U>
+
+    /**
+     * Same as `combineWith` but returns the object contained in the current
+     * Result rather than the parameter's one.
+     *
+     * @param result Result to combine with the current one.
+     */
+    combineWithLeft<U>(result: Result<U>): Result<T>
+
+    /**
      * Pattern matches against the result, which calls the given `onError` or
      * `onSuccess` depending on the state of the result.
      *
