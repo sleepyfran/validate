@@ -1,7 +1,7 @@
 import ValidationOf from './validation-of'
 
 /**
- * A set of applicable validations of strings.
+ * A set of applicable validations for strings.
  */
 export default interface ValidationOfStrings<T> {
     /**
