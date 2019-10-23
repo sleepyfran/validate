@@ -38,7 +38,8 @@ export default interface ValidationOfCollections<T> {
     ): ValidationOf<T>
 
     /**
-     * Checks that the length of the iterable is between the given numbers.
+     * Checks that the length of the iterable is between the given numbers, not
+     * including the min or the max.
      *
      * @param getter Accessor to the property.
      * @param min Minimum length of the iterable.
