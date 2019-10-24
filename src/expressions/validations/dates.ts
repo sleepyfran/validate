@@ -1,7 +1,7 @@
-import ValidationOf from '../types/validation-of'
-import ValidationStep from '../types/validation-step'
-import ValidationOfDates from '../types/validation-of-dates'
-import { createValidationOf } from './validation-state'
+import ValidationOf from '../../types/validations/of'
+import ValidationStep from '../../types/step'
+import ValidationOfDates from '../../types/validations/dates'
+import { createValidationOf } from './state'
 
 export default <T>(
     input: T,

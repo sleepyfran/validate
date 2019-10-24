@@ -1,7 +1,5 @@
-import ValidationStep, {
-    ValidationExpression,
-} from '../src/types/validation-step'
-import ValidationOf from '../src/types/validation-of'
+import ValidationStep, { ValidationExpression } from '../src/types/step'
+import ValidationOf from '../src/types/validations/of'
 
 /**
  * Asserts that the given steps has one validation step that evaluated to `result`.

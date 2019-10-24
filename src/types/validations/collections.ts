@@ -1,10 +1,10 @@
-import ValidationOf from './validation-of'
-import { IncludesLength, IncludesSize } from './inputs'
+import ValidationOf from './of'
+import { IncludesLength, IncludesSize } from '../inputs'
 
 /**
  * A set of applicable validations for collections.
  */
-export default interface ValidationOfCollections<T> {
+export default interface Collections<T> {
     /**
      * Checks whether an iterable (collections, strings, etc.) is empty or not.
      *

@@ -37,8 +37,8 @@ export type Expression =
     | InfoExpression
     | OperatorExpression
 
-type ValidationStep = {
+type Step = {
     expression: Expression
 }
 
-export default ValidationStep
+export default Step

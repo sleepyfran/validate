@@ -1,9 +1,9 @@
-import ValidationOf from './validation-of'
+import ValidationOf from './of'
 
 /**
  * A set of applicable validations for dates.
  */
-export default interface ValidationOfDates<T> {
+export default interface Dates<T> {
     /**
      * Checks whether a date is after the given date.
      *

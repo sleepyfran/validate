@@ -1,9 +1,9 @@
-import ValidationEnd from '../types/validation-end'
-import ValidationStep from '../types/validation-step'
-import validationInfo from './validation-info'
-import { Result } from '../types/result'
-import result from './result'
-import { createValidationOf } from './validation-state'
+import ValidationEnd from '../../types/validations/chain-end'
+import ValidationStep from '../../types/step'
+import validationInfo from './info'
+import { Result } from '../../types/result'
+import result from '../result'
+import { createValidationOf } from './state'
 
 export default <T>(
     input: T,

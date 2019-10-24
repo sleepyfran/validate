@@ -1,7 +1,7 @@
-import ValidationStep from '../types/validation-step'
-import ValidationInfo from '../types/validation-info'
-import ValidationEnd from '../types/validation-end'
-import { createValidationEnd } from './validation-state'
+import ValidationStep from '../../types/step'
+import ValidationInfo from '../../types/validations/info'
+import ValidationEnd from '../../types/validations/chain-end'
+import { createValidationEnd } from './state'
 
 export default <T>(
     input: T,

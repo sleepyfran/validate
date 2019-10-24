@@ -1,5 +1,5 @@
 import { Result, ValidationError } from '../types/result'
-import ValidationStep from '../types/validation-step'
+import ValidationStep from '../types/step'
 
 export default <T>(input: T, validationSteps: ValidationStep[]): Result<T> => ({
     combineWith<U>(result: Result<U>): Result<U> {

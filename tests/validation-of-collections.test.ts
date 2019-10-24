@@ -1,5 +1,5 @@
-import * as validationOf from '../src/expressions/validation-of'
-import validationOfCollections from '../src/expressions/validation-of-collections'
+import * as validationOf from '../src/expressions/validations/of'
+import validationOfCollections from '../src/expressions/validations/collections'
 import { assertSteps, assertValidationWithResult } from './utils'
 
 const validationOfSpy = jest.spyOn(validationOf, 'default')

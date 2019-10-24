@@ -1,4 +1,4 @@
-import ValidationOf from './validation-of'
+import ValidationOf from './validations/of'
 
 /**
  * Entry point of the validator.

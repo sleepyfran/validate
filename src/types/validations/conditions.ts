@@ -1,6 +1,6 @@
-import ValidationEnd from './validation-end'
+import ValidationEnd from './end'
 
-export default interface ValidationConditions<T> {
+export default interface Conditions<T> {
     /**
      * Apply the validation only if the given condition is met. Calling this
      * function ends the current validation chain.

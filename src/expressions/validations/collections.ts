@@ -1,8 +1,8 @@
-import ValidationOf from '../types/validation-of'
-import ValidationStep from '../types/validation-step'
-import ValidationOfCollections from '../types/validation-of-collections'
-import { IncludesLength, IncludesSize } from '../types/inputs'
-import { createValidationOf } from './validation-state'
+import ValidationOf from '../../types/validations/of'
+import ValidationStep from '../../types/step'
+import ValidationOfCollections from '../../types/validations/collections'
+import { IncludesLength, IncludesSize } from '../../types/inputs'
+import { createValidationOf } from './state'
 
 type LengthOrSize = IncludesSize | IncludesLength
 

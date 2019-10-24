@@ -1,8 +1,8 @@
-import ValidationOfStrings from '../types/validation-of-strings'
-import ValidationOf from '../types/validation-of'
-import ValidationStep from '../types/validation-step'
+import ValidationOfStrings from '../../types/strings'
+import ValidationOf from '../../types/validations/of'
+import ValidationStep from '../../types/step'
 import * as validator from 'validator'
-import { createValidationOf } from './validation-state'
+import { createValidationOf } from './state'
 
 export default <T>(
     input: T,

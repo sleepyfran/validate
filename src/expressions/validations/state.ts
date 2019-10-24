@@ -1,6 +1,6 @@
-import ValidationStep from '../types/validation-step'
-import validationOf from './validation-of'
-import validationEnd from './validation-end'
+import ValidationStep from '../../types/step'
+import validationOf from './of'
+import validationEnd from './chain-end'
 
 /**
  * Creates a new `ValidationOf` based on the input, previous steps and a new

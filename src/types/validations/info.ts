@@ -1,6 +1,6 @@
-import ValidationEnd from './validation-end'
+import ValidationEnd from './end'
 
-export default interface ValidationInfo<T> {
+export default interface Info<T> {
     /**
      * Adds an error code to the validation. Calling this function ends the
      * current validation chain.

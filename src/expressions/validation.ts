@@ -1,5 +1,5 @@
 import Validation from '../types/validation'
-import validationOf from './validation-of'
+import validationOf from './of'
 
 const validation: Validation = {
     of: input => {

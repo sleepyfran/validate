@@ -1,4 +1,4 @@
-import ValidationOf from './validation-of'
+import ValidationOf from './of'
 
 /**
  * Utility function to pipe a series of validations and combine them into one
