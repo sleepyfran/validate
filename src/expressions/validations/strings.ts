@@ -1,4 +1,4 @@
-import ValidationOfStrings from '../../types/strings'
+import ValidationOfStrings from '../../types/validations/strings'
 import ValidationOf from '../../types/validations/of'
 import ValidationStep from '../../types/step'
 import * as validator from 'validator'

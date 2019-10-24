@@ -1,8 +1,9 @@
-import ValidationOfStrings from '../strings'
+import ValidationOfStrings from './strings'
 import ValidationOfCollections from './collections'
 import ValidationInfo from './info'
 import ValidationConditions from './conditions'
 import ValidationOfDates from './dates'
+import ValidationOfNumbers from './numbers'
 import { Result } from '../result'
 
 /**
@@ -12,6 +13,7 @@ export default interface Of<T>
     extends ValidationOfStrings<T>,
         ValidationOfCollections<T>,
         ValidationOfDates<T>,
+        ValidationOfNumbers<T>,
         ValidationConditions<T>,
         ValidationInfo<T> {
     /**

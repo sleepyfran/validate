@@ -1,4 +1,4 @@
-import ValidationOf from './validations/of'
+import ValidationOf from './of'
 
 /**
  * A set of applicable validations for strings.

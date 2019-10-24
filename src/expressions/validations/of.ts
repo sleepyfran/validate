@@ -3,6 +3,7 @@ import ValidationStep from '../../types/step'
 import validationOfStrings from './strings'
 import validationOfCollections from './collections'
 import validationOfDates from './dates'
+import validationOfNumbers from './numbers'
 import validationInfo from './info'
 import validationConditions from './conditions'
 import result from '../result'
@@ -15,6 +16,7 @@ export default <T>(
     ...validationOfStrings(input, validationSteps),
     ...validationOfCollections(input, validationSteps),
     ...validationOfDates(input, validationSteps),
+    ...validationOfNumbers(input, validationSteps),
     ...validationInfo(input, validationSteps),
     ...validationConditions(input, validationSteps),
 

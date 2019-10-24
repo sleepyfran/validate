@@ -1,4 +1,4 @@
-import ValidationOfStrings from '../strings'
+import ValidationOfStrings from './strings'
 import ValidationOfCollections from './collections'
 import ValidationOfDates from './dates'
 
