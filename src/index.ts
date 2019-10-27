@@ -1,7 +1,14 @@
-import * as Validation from './types/validation'
-import validation from './expressions/validation'
+import Validation from './types/validation'
 
-export default {
-    Validation,
-    validation,
+const test = (val: Validation) => {
+    const userResult = val
+        .of({
+            name: 'Fran',
+            lastName: 'González',
+            age: 23,
+            handle: 'sleepyfran',
+        })
+        .property('name')
+        .alphanumeric()
+        .result()
 }
