@@ -1,7 +1,18 @@
-import { Result } from '../types/result'
-import ValidationStep from '../types/step'
+import { Result, ValidationError } from '../types/result'
 
-export default <T>(input: T, validationSteps: ValidationStep[]): Result<T> => ({
+const createResult = <T>(input: T, errors: ValidationError[]): Result<T> => ({
+    input() {
+        return input
+    },
+
+    combineWith<U>(result: Result<U>): Result<U> {
+        return createResult(result.input(), [...errors, ...result.errors()])
+    },
+
+    combineWithLeft<U>(result: Result<U>): Result<T> {
+        return createResult(input, [...errors, ...result.errors()])
+    },
+
     fold(onError, onSuccess) {
         this.hasErrors() ? onError(this.errors()) : onSuccess(input)
     },
@@ -14,3 +25,5 @@ export default <T>(input: T, validationSteps: ValidationStep[]): Result<T> => ({
         return []
     },
 })
+
+export default createResult
