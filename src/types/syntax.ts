@@ -7,6 +7,6 @@ import ChainEnd from './expressions/chain-end'
  * itself (T) and a set of operators, conditions and other utilities that
  * can be invoked after a validation.
  */
-type ValidatorSyntax<T> = T & Operators & Conditions & ChainEnd<T>
+type ValidatorSyntax<V, T> = V & Operators<T> & Conditions<T> & ChainEnd<T>
 
 export default ValidatorSyntax

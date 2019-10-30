@@ -7,19 +7,19 @@ export default interface StringValidator {
     /**
      * Checks if the input contains only letters and digits.
      */
-    alphanumeric(): ValidatorSyntax<StringValidator>
+    alphanumeric(): ValidatorSyntax<StringValidator, string>
 
     /**
      * Checks whether the input is empty or not.
      */
-    notEmpty(): ValidatorSyntax<StringValidator>
+    notEmpty(): ValidatorSyntax<StringValidator, string>
 
     /**
      * Checks that the length of the string is at least the given minimum.
      *
      * @param min Minimum length of the string.
      */
-    minLength(min: number): ValidatorSyntax<StringValidator>
+    minLength(min: number): ValidatorSyntax<StringValidator, string>
 
     /**
      * Checks that the length of the string is at not more than the given
@@ -27,7 +27,7 @@ export default interface StringValidator {
      *
      * @param max Maximum length of the string.
      */
-    maxLength(max: number): ValidatorSyntax<StringValidator>
+    maxLength(max: number): ValidatorSyntax<StringValidator, string>
 
     /**
      * Checks that the length of the string is between the given numbers, not
@@ -36,7 +36,10 @@ export default interface StringValidator {
      * @param min Minimum length of the string.
      * @param max Maximum length of the string.
      */
-    lengthBetween(min: number, max: number): ValidatorSyntax<StringValidator>
+    lengthBetween(
+        min: number,
+        max: number,
+    ): ValidatorSyntax<StringValidator, string>
 
     /**
      * Checks that the length of the string is between the given numbers,
@@ -48,5 +51,5 @@ export default interface StringValidator {
     inclusiveLengthBetween(
         min: number,
         max: number,
-    ): ValidatorSyntax<StringValidator>
+    ): ValidatorSyntax<StringValidator, string>
 }

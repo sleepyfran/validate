@@ -15,8 +15,6 @@ type Validator<T> = T extends string
     ? NumberValidator
     : T extends Date
     ? DateValidator
-    : T extends Object
-    ? ObjectValidator<T>
-    : never
+    : ObjectValidator<T>
 
 export default Validator

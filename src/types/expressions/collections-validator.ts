@@ -7,14 +7,14 @@ export default interface CollectionValidator {
     /**
      * Checks whether the input is empty or not.
      */
-    notEmpty(): ValidatorSyntax<CollectionValidator>
+    notEmpty(): ValidatorSyntax<CollectionValidator, any[]>
 
     /**
      * Checks that the length of the collections is at least the given minimum.
      *
      * @param min Minimum length of the collection.
      */
-    minLength(min: number): ValidatorSyntax<CollectionValidator>
+    minLength(min: number): ValidatorSyntax<CollectionValidator, any[]>
 
     /**
      * Checks that the length of the collection is at not more than the given
@@ -22,7 +22,7 @@ export default interface CollectionValidator {
      *
      * @param max Maximum length of the collection.
      */
-    maxLength(max: number): ValidatorSyntax<CollectionValidator>
+    maxLength(max: number): ValidatorSyntax<CollectionValidator, any[]>
 
     /**
      * Checks that the length of the collection is between the given numbers, not
@@ -34,7 +34,7 @@ export default interface CollectionValidator {
     lengthBetween(
         min: number,
         max: number,
-    ): ValidatorSyntax<CollectionValidator>
+    ): ValidatorSyntax<CollectionValidator, any[]>
 
     /**
      * Checks that the length of the collection is between the given numbers,
@@ -46,5 +46,5 @@ export default interface CollectionValidator {
     inclusiveLengthBetween(
         min: number,
         max: number,
-    ): ValidatorSyntax<CollectionValidator>
+    ): ValidatorSyntax<CollectionValidator, any[]>
 }

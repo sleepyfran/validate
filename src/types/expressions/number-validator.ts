@@ -8,45 +8,47 @@ export default interface NumberValidator {
      * Checks whether a number is zero or not.
      *
      */
-    zero(): ValidatorSyntax<NumberValidator>
+    zero(): ValidatorSyntax<NumberValidator, number>
 
     /**
      * Checks whether a number is positive or not.
      *
      */
-    positive(): ValidatorSyntax<NumberValidator>
+    positive(): ValidatorSyntax<NumberValidator, number>
 
     /**
      * Checks whether a number is negative or not.
      *
      */
-    negative(): ValidatorSyntax<NumberValidator>
+    negative(): ValidatorSyntax<NumberValidator, number>
 
     /**
      * Checks if the input is greater than a given number.
      *
      * @param threshold Number to check against.
      */
-    greaterThan(threshold: number): ValidatorSyntax<NumberValidator>
+    greaterThan(threshold: number): ValidatorSyntax<NumberValidator, number>
 
     /**
      * Checks if the input is greater than or equal to a given number.
      *
      * @param threshold Number to check against.
      */
-    greaterThanOrEqual(threshold: number): ValidatorSyntax<NumberValidator>
+    greaterThanOrEqual(
+        threshold: number,
+    ): ValidatorSyntax<NumberValidator, number>
 
     /**
      * Checks if the input is less than a given number.
      *
      * @param threshold Number to check against.
      */
-    lessThan(threshold: number): ValidatorSyntax<NumberValidator>
+    lessThan(threshold: number): ValidatorSyntax<NumberValidator, number>
 
     /**
      * Checks if the input is less than or equal to a given number.
      *
      * @param threshold Number to check against.
      */
-    lessThanOrEqual(threshold: number): ValidatorSyntax<NumberValidator>
+    lessThanOrEqual(threshold: number): ValidatorSyntax<NumberValidator, number>
 }

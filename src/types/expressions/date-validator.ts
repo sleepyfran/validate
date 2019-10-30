@@ -9,14 +9,14 @@ export default interface DateValidator {
      *
      * @param date Date to check against.
      */
-    after(date: Date): ValidatorSyntax<DateValidator>
+    after(date: Date): ValidatorSyntax<DateValidator, Date>
 
     /**
      * Checks whether a date is before the given date.
      *
      * @param date Date to check against.
      */
-    before(date: Date): ValidatorSyntax<DateValidator>
+    before(date: Date): ValidatorSyntax<DateValidator, Date>
 
     /**
      * Checks whether a date is between the given dates, including them.
@@ -24,12 +24,15 @@ export default interface DateValidator {
      * @param pastDate Past date to check against.
      * @param futureDate Future date to check against.
      */
-    between(pastDate: Date, futureDate: Date): ValidatorSyntax<DateValidator>
+    between(
+        pastDate: Date,
+        futureDate: Date,
+    ): ValidatorSyntax<DateValidator, Date>
 
     /**
      * Checks whether a date is the same as the given date.
      *
      * @param date Date to check against.
      */
-    same(date: Date): ValidatorSyntax<DateValidator>
+    same(date: Date): ValidatorSyntax<DateValidator, Date>
 }
