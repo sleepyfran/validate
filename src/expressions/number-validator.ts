@@ -1,37 +1,88 @@
 import Step from '../types/step'
 import NumberValidator from '../types/expressions/number-validator'
 import createSyntax from '../syntax'
+import { addValidationStep } from '../utils'
 
-const createNumberValidator = (
-    input: number,
+const createNumberValidator = <T>(
+    input: T,
+    property: number,
     steps: Step[],
-): NumberValidator => ({
+): NumberValidator<T> => ({
     zero() {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property === 0
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     positive() {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property > 0
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     negative() {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property < 0
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     greaterThan(threshold: number) {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property > threshold
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     greaterThanOrEqual(threshold: number) {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property >= threshold
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     lessThan(threshold: number) {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property < threshold
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     lessThanOrEqual(threshold: number) {
-        return createSyntax(createNumberValidator, input, steps)
+        const fulfillsValidation = property <= threshold
+
+        return createSyntax(
+            createNumberValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 })
 

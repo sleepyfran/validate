@@ -9,5 +9,5 @@ export default interface ObjectValidator<T> {
      *
      * @param property Property of the input to validate.
      */
-    property<K extends keyof T>(property: K): Validator<T[K]>
+    property<K extends keyof T>(property: K): Validator<T, T[K]>
 }

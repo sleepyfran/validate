@@ -1,3 +1,5 @@
+import Step, { Expression, OperatorExpression } from './types/step'
+
 /**
  * Checks if the input is a string.
  *
@@ -35,3 +37,30 @@ export const isCollection = (input: any): input is any[] => Array.isArray(input)
  */
 export const isObject = (input: any): input is object =>
     typeof input === 'object'
+
+/**
+ * Creates a new step based on the given expression and combines it with the
+ * current list of steps.
+ *
+ * @param steps Current list of steps.
+ * @param expression New expression to add to the list.
+ */
+export const addStep = (steps: Step[], expression: Expression): Step[] => {
+    return [
+        ...steps,
+        {
+            expression,
+        },
+    ]
+}
+
+/**
+ * Calls `addStep` with a validation step.
+ *
+ * @param steps Current list of steps.
+ * @param fulfillsValidation Whether or not the validation was successful.
+ */
+export const addValidationStep = (
+    steps: Step[],
+    fulfillsValidation: boolean,
+): Step[] => addStep(steps, { kind: 'validation', fulfillsValidation })

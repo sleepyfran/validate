@@ -3,31 +3,33 @@ import ValidatorSyntax from '../syntax'
 /**
  * Set of validations that are applicable to numbers.
  */
-export default interface NumberValidator {
+export default interface NumberValidator<T> {
     /**
      * Checks whether a number is zero or not.
      *
      */
-    zero(): ValidatorSyntax<NumberValidator, number>
+    zero(): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks whether a number is positive or not.
      *
      */
-    positive(): ValidatorSyntax<NumberValidator, number>
+    positive(): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks whether a number is negative or not.
      *
      */
-    negative(): ValidatorSyntax<NumberValidator, number>
+    negative(): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks if the input is greater than a given number.
      *
      * @param threshold Number to check against.
      */
-    greaterThan(threshold: number): ValidatorSyntax<NumberValidator, number>
+    greaterThan(
+        threshold: number,
+    ): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks if the input is greater than or equal to a given number.
@@ -36,19 +38,21 @@ export default interface NumberValidator {
      */
     greaterThanOrEqual(
         threshold: number,
-    ): ValidatorSyntax<NumberValidator, number>
+    ): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks if the input is less than a given number.
      *
      * @param threshold Number to check against.
      */
-    lessThan(threshold: number): ValidatorSyntax<NumberValidator, number>
+    lessThan(threshold: number): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks if the input is less than or equal to a given number.
      *
      * @param threshold Number to check against.
      */
-    lessThanOrEqual(threshold: number): ValidatorSyntax<NumberValidator, number>
+    lessThanOrEqual(
+        threshold: number,
+    ): ValidatorSyntax<NumberValidator<T>, T, number>
 }

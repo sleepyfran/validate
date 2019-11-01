@@ -1,22 +1,55 @@
 import Step from '../types/step'
 import DateValidator from '../types/expressions/date-validator'
 import createSyntax from '../syntax'
+import { addValidationStep } from '../utils'
 
-const createDateValidator = (input: Date, steps: Step[]): DateValidator => ({
+const createDateValidator = <T>(
+    input: T,
+    property: Date,
+    steps: Step[],
+): DateValidator<T> => ({
     after(date: Date) {
-        return createSyntax(createDateValidator, input, steps)
+        const fulfillsValidation = property > date
+
+        return createSyntax(
+            createDateValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     before(date: Date) {
-        return createSyntax(createDateValidator, input, steps)
+        const fulfillsValidation = property < date
+
+        return createSyntax(
+            createDateValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     between(pastDate: Date, futureDate: Date) {
-        return createSyntax(createDateValidator, input, steps)
+        const fulfillsValidation = pastDate < property && property < futureDate
+
+        return createSyntax(
+            createDateValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 
     same(date: Date) {
-        return createSyntax(createDateValidator, input, steps)
+        const fulfillsValidation = property.valueOf() == date.valueOf()
+
+        return createSyntax(
+            createDateValidator,
+            input,
+            property,
+            addValidationStep(steps, fulfillsValidation),
+        )
     },
 })
 

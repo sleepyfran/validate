@@ -11,7 +11,7 @@ export interface ValidationExpression {
  */
 export interface ConditionExpression {
     kind: 'condition'
-    fulfillsCondition: boolean
+    applyValidations: boolean
 }
 
 /**

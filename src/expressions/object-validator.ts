@@ -6,8 +6,8 @@ const createObjectValidator = <T>(
     input: T,
     steps: Step[],
 ): ObjectValidator<T> => ({
-    property(property) {
-        return createValidation(steps).of(input[property])
+    property<K extends keyof T>(property: K) {
+        return createValidation(steps).of<T, T[K]>(input[property])
     },
 })
 
