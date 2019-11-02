@@ -9,7 +9,7 @@ import ObjectValidator from './object-validator'
  */
 type Validator<T, P> = P extends string
     ? StringValidator<T>
-    : P extends []
+    : P extends any[]
     ? CollectionValidator<T>
     : P extends number
     ? NumberValidator<T>
