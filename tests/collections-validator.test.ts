@@ -30,6 +30,12 @@ describe('minLength', () => {
 
         Validation.of([1, 2, 3]).minLength(5)
     })
+
+    test('when input has same length as min', () => {
+        assertSteps(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of([1, 2, 3]).minLength(3)
+    })
 })
 
 describe('maxLength', () => {
@@ -43,6 +49,12 @@ describe('maxLength', () => {
         assertSteps(syntaxSpy, assertValidationWithResult(false))
 
         Validation.of([1, 2, 3]).maxLength(2)
+    })
+
+    test('when input has same length as max', () => {
+        assertSteps(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of([1, 2, 3]).maxLength(3)
     })
 })
 
