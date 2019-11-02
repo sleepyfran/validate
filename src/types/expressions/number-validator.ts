@@ -6,21 +6,25 @@ import ValidatorSyntax from '../syntax'
 export default interface NumberValidator<T> {
     /**
      * Checks whether a number is zero or not.
-     *
      */
     zero(): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks whether a number is positive or not.
-     *
      */
     positive(): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks whether a number is negative or not.
-     *
      */
     negative(): ValidatorSyntax<NumberValidator<T>, T, number>
+
+    /**
+     * Checks if the input equals a given number.
+     *
+     * @param number Number to check against.
+     */
+    equals(number: number): ValidatorSyntax<NumberValidator<T>, T, number>
 
     /**
      * Checks if the input is greater than a given number.
