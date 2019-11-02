@@ -16,15 +16,23 @@ const createValidation = (steps: Step[]): Validation => ({
      * provided `T` type. You can either provide a simple type like a `number`
      * or a `string` or a complex object.
      */
-    of(input) {
-        if (isString(input)) {
-            return createStringValidator(input, input, steps) as any
-        } else if (isNumber(input)) {
-            return createNumberValidator(input, input, steps) as any
-        } else if (isCollection(input)) {
-            return createCollectionsValidator(input, input, steps) as any
-        } else if (isDate(input)) {
-            return createDateValidator(input, input, steps) as any
+    of(input, propertyName) {
+        const property = propertyName ? propertyName.toString() : ''
+        const value = propertyName ? (input as any)[propertyName] : input
+
+        if (isString(value)) {
+            return createStringValidator(input, property, value, steps) as any
+        } else if (isNumber(value)) {
+            return createNumberValidator(input, property, value, steps) as any
+        } else if (isCollection(value)) {
+            return createCollectionsValidator(
+                input,
+                property,
+                value,
+                steps,
+            ) as any
+        } else if (isDate(value)) {
+            return createDateValidator(input, property, value, steps) as any
         }
 
         return createObjectValidator(input, steps) as any

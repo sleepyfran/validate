@@ -22,7 +22,7 @@ const createResult = <T>(input: T, errors: ValidationError[]): Result<T> => ({
     },
 
     errors: () => {
-        return []
+        return errors
     },
 })
 

@@ -5,14 +5,20 @@ import createChainEnd from './expressions/chain-end'
 import createOperators from './expressions/operators'
 
 const createSyntax = <V, T, P>(
-    createValidator: (input: T, property: P, steps: Step[]) => V,
+    createValidator: (
+        input: T,
+        propertyName: string,
+        value: P,
+        steps: Step[],
+    ) => V,
     input: T,
-    property: P,
+    propertyName: string,
+    value: P,
     steps: Step[],
 ): ValidatorSyntax<V, T, P> => ({
-    ...createValidator(input, property, steps),
-    ...createOperators(input, property, steps),
-    ...createConditions(input, property, steps),
+    ...createValidator(input, propertyName, value, steps),
+    ...createOperators(input, propertyName, value, steps),
+    ...createConditions(input, propertyName, value, steps),
     ...createChainEnd(input, steps),
 })
 

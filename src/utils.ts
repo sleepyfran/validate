@@ -58,9 +58,25 @@ export const addStep = (steps: Step[], expression: Expression): Step[] => {
  * Calls `addStep` with a validation step.
  *
  * @param steps Current list of steps.
+ * @param propertyName Name of the property being validated.
  * @param fulfillsValidation Whether or not the validation was successful.
  */
 export const addValidationStep = (
     steps: Step[],
+    propertyName: string,
     fulfillsValidation: boolean,
-): Step[] => addStep(steps, { kind: 'validation', fulfillsValidation })
+): Step[] =>
+    addStep(steps, {
+        kind: 'validation',
+        property: propertyName,
+        fulfillsValidation,
+    })
+
+/**
+ * Returns a new array skipping from 0 to `times` items.
+ *
+ * @param array Array to modify.
+ * @param times Number of times to skip elements.
+ */
+export const skip = <T>(array: T[], times: number): T[] =>
+    array.slice(times, array.length)

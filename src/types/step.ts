@@ -4,6 +4,7 @@
 export interface ValidationExpression {
     kind: 'validation'
     fulfillsValidation: boolean
+    property: string
 }
 
 /**

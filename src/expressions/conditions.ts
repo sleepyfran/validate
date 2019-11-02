@@ -6,7 +6,8 @@ import { addStep } from '../utils'
 
 const createConditions = <T, P>(
     input: T,
-    property: P,
+    propertyName: string,
+    value: P,
     steps: Step[],
 ): Conditions<T, P> => ({
     when(condition) {
@@ -17,7 +18,7 @@ const createConditions = <T, P>(
 
         return {
             ...createChainEnd(input, updatedSteps),
-            ...createOperators(input, property, updatedSteps),
+            ...createOperators(input, propertyName, value, updatedSteps),
         }
     },
 
@@ -29,7 +30,7 @@ const createConditions = <T, P>(
 
         return {
             ...createChainEnd(input, updatedSteps),
-            ...createOperators(input, property, updatedSteps),
+            ...createOperators(input, propertyName, value, updatedSteps),
         }
     },
 })

@@ -27,7 +27,7 @@ export const assertSteps = (
     spy: jest.SpyInstance<ValidatorSyntax<any, any, any>>,
     assert: (steps: Step[]) => void,
 ): void => {
-    spy.mockImplementation((creator, input, property, steps) => {
+    spy.mockImplementation((creator, input, propertyName, value, steps) => {
         assert(steps)
         return {} as ValidatorSyntax<any, any, any>
     })

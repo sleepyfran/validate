@@ -5,50 +5,55 @@ import { addValidationStep } from '../utils'
 
 const createDateValidator = <T>(
     input: T,
-    property: Date,
+    propertyName: string,
+    value: Date,
     steps: Step[],
 ): DateValidator<T> => ({
     after(date: Date) {
-        const fulfillsValidation = property > date
+        const fulfillsValidation = value > date
 
         return createSyntax(
             createDateValidator,
             input,
-            property,
-            addValidationStep(steps, fulfillsValidation),
+            propertyName,
+            value,
+            addValidationStep(steps, propertyName, fulfillsValidation),
         )
     },
 
     before(date: Date) {
-        const fulfillsValidation = property < date
+        const fulfillsValidation = value < date
 
         return createSyntax(
             createDateValidator,
             input,
-            property,
-            addValidationStep(steps, fulfillsValidation),
+            propertyName,
+            value,
+            addValidationStep(steps, propertyName, fulfillsValidation),
         )
     },
 
     between(pastDate: Date, futureDate: Date) {
-        const fulfillsValidation = pastDate < property && property < futureDate
+        const fulfillsValidation = pastDate < value && value < futureDate
 
         return createSyntax(
             createDateValidator,
             input,
-            property,
-            addValidationStep(steps, fulfillsValidation),
+            propertyName,
+            value,
+            addValidationStep(steps, propertyName, fulfillsValidation),
         )
     },
 
     same(date: Date) {
-        const fulfillsValidation = property.valueOf() == date.valueOf()
+        const fulfillsValidation = value.valueOf() == date.valueOf()
 
         return createSyntax(
             createDateValidator,
             input,
-            property,
-            addValidationStep(steps, fulfillsValidation),
+            propertyName,
+            value,
+            addValidationStep(steps, propertyName, fulfillsValidation),
         )
     },
 })

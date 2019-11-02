@@ -4,15 +4,16 @@ import createValidation from '../validation'
 
 const createOperators = <T, P>(
     previousInput: T,
-    property: P,
+    propertyName: string,
+    value: P,
     steps: Step[],
 ): Operators<T, P> => ({
-    and<U>(input: U) {
-        return createValidation(steps).of<U, P>(input)
+    and<U, K extends keyof U>(input: U) {
+        return createValidation(steps).of<U, P, K>(input)
     },
 
     andProperty<K extends keyof T>(property: K) {
-        return createValidation(steps).of<T, T[K]>(previousInput[property])
+        return createValidation(steps).of<T, T[K], K>(previousInput, property)
     },
 })
 

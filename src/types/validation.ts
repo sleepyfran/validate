@@ -9,5 +9,5 @@ export default interface Validation {
      * provided `T` type. You can either provide a simple type like a `number`
      * or a `string` or a complex object.
      */
-    of<T, P>(input: T | P): Validator<T, P>
+    of<T, P, K extends keyof T>(input: T | P, propertyName?: K): Validator<T, P>
 }
