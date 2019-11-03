@@ -16,6 +16,13 @@
             "pre-commit": "yarn test"
         }
     },
+    "keywords": [
+        "typescript",
+        "validator",
+        "validate",
+        "fluent api",
+        "functional"
+    ],
     "devDependencies": {
         "@types/jest": "^24.0.19",
         "@types/validator": "^10.11.3",
