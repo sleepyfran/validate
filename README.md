@@ -112,8 +112,8 @@ Head to the [wiki page](https://github.com/sleepyfran/validum/wiki).
 `validum` uses `yarn` as the default package manager, so for building the project it's recommended that you use the same; using `npm` is still an option, though, but `yarn` is recommended for a more predictable build. That being said:
 
 ```bash
-git clone https://github.com/duets/game.git duets
-cd duets
+git clone https://github.com/sleepyfran/validum.git
+cd validum
 yarn install
 ```
 
