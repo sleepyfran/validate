@@ -3,6 +3,10 @@
         "target": "es6",
         "module": "commonjs",
         "strict": true,
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+        "declaration": true,
+        "outDir": "./lib"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "tests"]
 }

@@ -2,14 +2,24 @@
     "name": "validum",
     "version": "0.1.0",
     "description": "☑️ A simple fluent validation library for TypeScript",
-    "main": "index.js",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "repository": "https://github.com/sleepyfran/validum",
     "author": "Fran González <fgonzaleva@icloud.com>",
     "license": "MIT",
     "private": false,
+    "files": [
+        "lib/**/*"
+    ],
     "scripts": {
-        "lint": "eslint ./**/*.ts --fix",
-        "test": "jest"
+        "build": "tsc",
+        "lint": "eslint ./src/*.ts --fix",
+        "prepare": "yarn build",
+        "prepublishOnly": "yarn test && yarn lint",
+        "preversion": "yarn lint",
+        "test": "jest",
+        "version": "yarn lint && git add .",
+        "postversion": "git push && git push --tags"
     },
     "husky": {
         "hooks": {
