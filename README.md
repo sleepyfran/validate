@@ -1,6 +1,6 @@
-# ☑️ validate
+# ☑️ validum
 
-`validate` is a simple fluent validation library that allows you to validate anything by creating a _chain_ of validations like this:
+`validum` is a simple fluent validation library that allows you to validate anything by creating a _chain_ of validations like this:
 
 ```ts
 const user = {
@@ -105,11 +105,11 @@ The library is not yet published.
 
 ## 📖 Documentation
 
-Head to the [wiki page](https://github.com/sleepyfran/validate/wiki).
+Head to the [wiki page](https://github.com/sleepyfran/validum/wiki).
 
 ## 🛠 Building
 
-`validate` uses `yarn` as the default package manager, so for building the project it's recommended that you use the same; using `npm` is still an option, though, but `yarn` is recommended for a more predictable build. That being said:
+`validum` uses `yarn` as the default package manager, so for building the project it's recommended that you use the same; using `npm` is still an option, though, but `yarn` is recommended for a more predictable build. That being said:
 
 ```bash
 git clone https://github.com/duets/game.git duets
@@ -125,8 +125,8 @@ After building you can execute the tests by simply running `yarn test`.
 
 ### Can you add _XYZ_ validator/feature?
 
-This library was created specifically for [Duets](https://github.com/duets/game) and it may not cover every use-case. If you want a feature to be added, feel free to [open an issue](https://github.com/sleepyfran/validate/issues) and we'll discuss the possibility there.
+This library was created specifically for [Duets](https://github.com/duets/game) and it may not cover every use-case. If you want a feature to be added, feel free to [open an issue](https://github.com/sleepyfran/validum/issues) and we'll discuss the possibility there.
 
 ### How can I contribute?
 
-Take a look at the current [issues](https://github.com/sleepyfran/validate/issues) or open your own so we can discuss how the implementation would go.
+Take a look at the current [issues](https://github.com/sleepyfran/validum/issues) or open your own so we can discuss how the implementation would go.

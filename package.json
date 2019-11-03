@@ -1,9 +1,9 @@
 {
-    "name": "validate",
+    "name": "validum",
     "version": "0.1.0",
     "description": "☑️ A simple fluent validation library for TypeScript",
     "main": "index.js",
-    "repository": "https://github.com/sleepyfran/validate",
+    "repository": "https://github.com/sleepyfran/validum",
     "author": "Fran González <fgonzaleva@icloud.com>",
     "license": "MIT",
     "private": false,
@@ -17,6 +17,7 @@
         }
     },
     "keywords": [
+        "validum",
         "typescript",
         "validator",
         "validate",
