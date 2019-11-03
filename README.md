@@ -101,7 +101,12 @@ If we call `errors()` on `combinedResult` now it will return:
 
 ## 🧰 Installation
 
-The library is not yet published.
+```bash
+npm install validum
+
+# or if you use yarn
+yarn add validum
+```
 
 ## 📖 Documentation
 
