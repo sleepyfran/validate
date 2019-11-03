@@ -20,19 +20,20 @@ const createValidation = (steps: Step[]): Validation => ({
         const property = propertyName ? propertyName.toString() : ''
         const value = propertyName ? (input as any)[propertyName] : input
 
+        const validatorInput = {
+            input,
+            propertyName: property,
+            value,
+        }
+
         if (isString(value)) {
-            return createStringValidator(input, property, value, steps) as any
+            return createStringValidator(validatorInput, steps) as any
         } else if (isNumber(value)) {
-            return createNumberValidator(input, property, value, steps) as any
+            return createNumberValidator(validatorInput, steps) as any
         } else if (isCollection(value)) {
-            return createCollectionsValidator(
-                input,
-                property,
-                value,
-                steps,
-            ) as any
+            return createCollectionsValidator(validatorInput, steps) as any
         } else if (isDate(value)) {
-            return createDateValidator(input, property, value, steps) as any
+            return createDateValidator(validatorInput, steps) as any
         }
 
         return createObjectValidator(input, steps) as any

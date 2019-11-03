@@ -1,4 +1,10 @@
-import Step, { Expression, OperatorExpression } from './types/step'
+import Step, {
+    ConditionExpression,
+    Expression,
+    InfoExpression,
+    OperatorExpression,
+    ValidationExpression,
+} from './types/step'
 
 /**
  * Checks if the input is a string.
@@ -37,6 +43,42 @@ export const isCollection = (input: any): input is any[] => Array.isArray(input)
  */
 export const isObject = (input: any): input is object =>
     typeof input === 'object'
+
+/**
+ * Checks if the expression is a validation expression.
+ *
+ * @param expression Expression to check.
+ */
+export const isValidationExpression = (
+    expression: Expression,
+): expression is ValidationExpression => expression.kind === 'validation'
+
+/**
+ * Checks if the expression is a condition expression.
+ *
+ * @param expression Expression to check.
+ */
+export const isConditionExpression = (
+    expression: Expression,
+): expression is ConditionExpression => expression.kind === 'condition'
+
+/**
+ * Checks if the expression is an info expression.
+ *
+ * @param expression Expression to check.
+ */
+export const isInfoExpression = (
+    expression: Expression,
+): expression is InfoExpression => expression.kind === 'info'
+
+/**
+ * Checks if the expression is an operator expression.
+ *
+ * @param expression Expression to check.
+ */
+export const isOperatorExpression = (
+    expression: Expression,
+): expression is OperatorExpression => expression.kind === 'operator'
 
 /**
  * Creates a new step based on the given expression and combines it with the

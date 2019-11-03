@@ -1,35 +1,21 @@
 import Step, {
     ConditionExpression,
-    Expression,
     InfoExpression,
     OperatorExpression,
     ValidationExpression,
 } from './types/step'
 import { Result, ValidationError } from './types/result'
 import createResult from './expressions/result'
-import { skip } from './utils'
+import {
+    isConditionExpression,
+    isInfoExpression,
+    isOperatorExpression,
+    isValidationExpression,
+    skip,
+} from './utils'
+import { ParserState } from './types/parser'
 
-const isValidationExpression = (
-    expression: Expression,
-): expression is ValidationExpression => expression.kind === 'validation'
-
-const isConditionExpression = (
-    expression: Expression,
-): expression is ConditionExpression => expression.kind === 'condition'
-
-const isInfoExpression = (
-    expression: Expression,
-): expression is InfoExpression => expression.kind === 'info'
-
-const isOperatorExpression = (
-    expression: Expression,
-): expression is OperatorExpression => expression.kind === 'operator'
-
-type ParserState = {
-    propertyResult: [string, boolean][]
-    message?: string
-    code?: number
-}
+const hasErrors = (errors: [string, boolean][]) => errors.some(err => err[1])
 
 const parseValidationExpression = (
     state: ParserState,
@@ -54,6 +40,15 @@ const parseConditionExpression = (
     }
 }
 
+const parseInfoExpression = (
+    state: ParserState,
+    expression: InfoExpression,
+): ParserState => {
+    return {
+        ...state,
+    }
+}
+
 const parseAndOperator = (
     state: ParserState,
     expression: OperatorExpression,
@@ -65,8 +60,6 @@ const parseAndOperator = (
 
     return state.propertyResult.concat(tailState.propertyResult)
 }
-
-const hasErrors = (errors: [string, boolean][]) => errors.some(err => err[1])
 
 const parseOrOperator = (
     state: ParserState,
@@ -116,6 +109,7 @@ const parseSteps = (steps: Step[]): ParserState => {
         }
 
         if (isInfoExpression(expression)) {
+            return parseInfoExpression(state, expression)
         }
 
         if (isOperatorExpression(expression)) {
@@ -126,6 +120,12 @@ const parseSteps = (steps: Step[]): ParserState => {
     }, initialState)
 }
 
+/**
+ * Creates a result from an input and a list of validation steps.
+ *
+ * @param input Input that was given to the validator.
+ * @param steps Steps produced during the validation process.
+ */
 export const parse = <T>(input: T, steps: Step[]): Result<T> => {
     const parsedSteps = parseSteps(steps)
 

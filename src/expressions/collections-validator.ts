@@ -2,70 +2,61 @@ import Step from '../types/step'
 import CollectionValidator from '../types/expressions/collections-validator'
 import createSyntax from '../syntax'
 import { addValidationStep } from '../utils'
+import { Input } from '../types/input'
 
 const createCollectionsValidator = <T>(
-    input: T,
-    propertyName: string,
-    value: any[],
+    input: Input<T, any[]>,
     steps: Step[],
 ): CollectionValidator<T> => ({
     notEmpty() {
-        const fulfillsValidation = value.length > 0
+        const fulfillsValidation = input.value.length > 0
 
         return createSyntax(
             createCollectionsValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     minLength(min: number) {
-        const fulfillsValidation = value.length > min
+        const fulfillsValidation = input.value.length > min
 
         return createSyntax(
             createCollectionsValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     maxLength(max: number) {
-        const fulfillsValidation = value.length < max
+        const fulfillsValidation = input.value.length < max
 
         return createSyntax(
             createCollectionsValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     lengthBetween(min: number, max: number) {
-        const fulfillsValidation = min < value.length && value.length < max
+        const fulfillsValidation =
+            min < input.value.length && input.value.length < max
 
         return createSyntax(
             createCollectionsValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     inclusiveLengthBetween(min: number, max: number) {
-        const fulfillsValidation = min <= value.length && value.length <= max
+        const fulfillsValidation =
+            min <= input.value.length && input.value.length <= max
 
         return createSyntax(
             createCollectionsValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 })

@@ -1,6 +1,7 @@
 import Operators from './expressions/operators'
 import Conditions from './expressions/conditions'
 import ChainEnd from './expressions/chain-end'
+import Info from './expressions/info'
 
 /**
  * Defines the return of a validator operations, which combines the validator
@@ -10,6 +11,7 @@ import ChainEnd from './expressions/chain-end'
 type ValidatorSyntax<V, T, P> = V &
     Operators<T, P> &
     Conditions<T, P> &
+    Info<T, P> &
     ChainEnd<T>
 
 export default ValidatorSyntax

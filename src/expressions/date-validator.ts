@@ -2,58 +2,50 @@ import Step from '../types/step'
 import DateValidator from '../types/expressions/date-validator'
 import createSyntax from '../syntax'
 import { addValidationStep } from '../utils'
+import { Input } from '../types/input'
 
 const createDateValidator = <T>(
-    input: T,
-    propertyName: string,
-    value: Date,
+    input: Input<T, Date>,
     steps: Step[],
 ): DateValidator<T> => ({
     after(date: Date) {
-        const fulfillsValidation = value > date
+        const fulfillsValidation = input.value > date
 
         return createSyntax(
             createDateValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     before(date: Date) {
-        const fulfillsValidation = value < date
+        const fulfillsValidation = input.value < date
 
         return createSyntax(
             createDateValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     between(pastDate: Date, futureDate: Date) {
-        const fulfillsValidation = pastDate < value && value < futureDate
+        const fulfillsValidation =
+            pastDate < input.value && input.value < futureDate
 
         return createSyntax(
             createDateValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     same(date: Date) {
-        const fulfillsValidation = value.valueOf() == date.valueOf()
+        const fulfillsValidation = input.value.valueOf() == date.valueOf()
 
         return createSyntax(
             createDateValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 })

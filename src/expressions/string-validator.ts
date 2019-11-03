@@ -3,82 +3,71 @@ import StringValidator from '../types/expressions/string-validator'
 import createSyntax from '../syntax'
 import { addValidationStep } from '../utils'
 import * as validator from 'validator'
+import { Input } from '../types/input'
 
 const createStringValidator = <T>(
-    input: T,
-    propertyName: string,
-    value: string,
+    input: Input<T, string>,
     steps: Step[],
 ): StringValidator<T> => ({
     alphanumeric() {
-        const fulfillsValidation = validator.isAlphanumeric(value)
+        const fulfillsValidation = validator.isAlphanumeric(input.value)
 
         return createSyntax(
             createStringValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     notEmpty() {
-        const fulfillsValidation = value.length > 0
+        const fulfillsValidation = input.value.length > 0
 
         return createSyntax(
             createStringValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     minLength(min: number) {
-        const fulfillsValidation = value.length > min
+        const fulfillsValidation = input.value.length > min
 
         return createSyntax(
             createStringValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     maxLength(max: number) {
-        const fulfillsValidation = value.length < max
+        const fulfillsValidation = input.value.length < max
 
         return createSyntax(
             createStringValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     lengthBetween(min: number, max: number) {
-        const fulfillsValidation = min < value.length && value.length < max
+        const fulfillsValidation =
+            min < input.value.length && input.value.length < max
 
         return createSyntax(
             createStringValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 
     inclusiveLengthBetween(min: number, max: number) {
-        const fulfillsValidation = min <= value.length && value.length <= max
+        const fulfillsValidation =
+            min <= input.value.length && input.value.length <= max
 
         return createSyntax(
             createStringValidator,
             input,
-            propertyName,
-            value,
-            addValidationStep(steps, propertyName, fulfillsValidation),
+            addValidationStep(steps, input.propertyName, fulfillsValidation),
         )
     },
 })
