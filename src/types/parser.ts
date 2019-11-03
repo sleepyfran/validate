@@ -1,9 +1,7 @@
 export type PropertyResult = {
-    property: string
+    errored: boolean
+    message: string
+    code?: number | string
 }
 
-export type ParserState = {
-    propertyResult: [string, boolean][]
-    message?: string
-    code?: number
-}
+export type ParserState = [string, PropertyResult][]

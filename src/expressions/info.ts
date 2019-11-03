@@ -1,36 +1,52 @@
 import Step from '../types/step'
 import Info from '../types/expressions/info'
-import createChainEnd from './chain-end'
-import createOperators from './operators'
-import { addStep } from '../utils'
-import createConditions from './conditions'
 import { Input } from '../types/input'
+import { isValidationExpression, updateCode, updateMessage } from '../utils'
+import createValidation from '../validation'
+import Validator from '../types/expressions/validator'
+import createSyntax from '../syntax'
+
+const createValidationOf = <T, P>(
+    input: Input<T, P>,
+    steps: Step[],
+): Validator<T, P> =>
+    createValidation(steps).of<T, P, keyof T>(
+        input.input,
+        input.propertyName as keyof T,
+    )
 
 const createInfo = <T, P>(input: Input<T, P>, steps: Step[]): Info<T, P> => ({
     withCode(code) {
-        const updatedSteps = addStep(steps, {
-            kind: 'info',
-            code,
-        })
+        const clonedSteps = [...steps]
+        const lastStep = clonedSteps.pop()
+        if (!lastStep) return createSyntax(createValidationOf, input, steps)
+        if (!isValidationExpression(lastStep.expression))
+            return createSyntax(createValidationOf, input, steps)
 
-        return {
-            ...createChainEnd(input, updatedSteps),
-            ...createOperators(input, updatedSteps),
-            ...createConditions(input, updatedSteps),
-        }
+        const updatedSteps = [
+            ...clonedSteps,
+            { ...lastStep, expression: updateCode(lastStep.expression, code) },
+        ]
+
+        return createSyntax(createValidationOf, input, updatedSteps)
     },
 
     withMessage(message) {
-        const updatedSteps = addStep(steps, {
-            kind: 'info',
-            message,
-        })
+        const clonedSteps = [...steps]
+        const lastStep = clonedSteps.pop()
+        if (!lastStep) return createSyntax(createValidationOf, input, steps)
+        if (!isValidationExpression(lastStep.expression))
+            return createSyntax(createValidationOf, input, steps)
 
-        return {
-            ...createChainEnd(input, updatedSteps),
-            ...createOperators(input, updatedSteps),
-            ...createConditions(input, updatedSteps),
-        }
+        const updatedSteps = [
+            ...clonedSteps,
+            {
+                ...lastStep,
+                expression: updateMessage(lastStep.expression, message),
+            },
+        ]
+
+        return createSyntax(createValidationOf, input, updatedSteps)
     },
 })
 

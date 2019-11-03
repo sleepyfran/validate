@@ -3,9 +3,9 @@
  * or the property that produced the error.
  */
 export interface ValidationError {
-    code?: number
-    message?: string
-    property?: string
+    code?: number | string
+    message: string
+    property: string
 }
 
 /**

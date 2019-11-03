@@ -5,6 +5,8 @@ export interface ValidationExpression {
     kind: 'validation'
     fulfillsValidation: boolean
     property: string
+    message: string
+    code?: number | string
 }
 
 /**
@@ -13,15 +15,6 @@ export interface ValidationExpression {
 export interface ConditionExpression {
     kind: 'condition'
     applyValidations: boolean
-}
-
-/**
- * Defines a message or code to append to the previous validations.
- */
-export interface InfoExpression {
-    kind: 'info'
-    message?: string
-    code?: number | string
 }
 
 /**
@@ -35,7 +28,6 @@ export interface OperatorExpression {
 export type Expression =
     | ValidationExpression
     | ConditionExpression
-    | InfoExpression
     | OperatorExpression
 
 type Step = {

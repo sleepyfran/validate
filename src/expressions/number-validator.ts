@@ -1,7 +1,7 @@
 import Step from '../types/step'
 import NumberValidator from '../types/expressions/number-validator'
 import createSyntax from '../syntax'
-import { addValidationStep } from '../utils'
+import { addValidationStep, propertyNameOrDefault } from '../utils'
 import { Input } from '../types/input'
 
 const createNumberValidator = <T>(
@@ -14,7 +14,12 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(input.propertyName)} must be zero`,
+            ),
         )
     },
 
@@ -24,7 +29,12 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(input.propertyName)} must be positive`,
+            ),
         )
     },
 
@@ -34,7 +44,12 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(input.propertyName)} must be negative`,
+            ),
         )
     },
 
@@ -44,7 +59,14 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be equal to ${number}`,
+            ),
         )
     },
 
@@ -54,7 +76,14 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be greater than ${threshold}`,
+            ),
         )
     },
 
@@ -64,7 +93,14 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be greater than or equal to ${threshold}`,
+            ),
         )
     },
 
@@ -74,7 +110,14 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be less than ${threshold}`,
+            ),
         )
     },
 
@@ -84,7 +127,14 @@ const createNumberValidator = <T>(
         return createSyntax(
             createNumberValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be less than or equal to ${threshold}`,
+            ),
         )
     },
 })

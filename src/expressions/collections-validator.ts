@@ -1,7 +1,7 @@
 import Step from '../types/step'
 import CollectionValidator from '../types/expressions/collections-validator'
 import createSyntax from '../syntax'
-import { addValidationStep } from '../utils'
+import { addValidationStep, propertyNameOrDefault } from '../utils'
 import { Input } from '../types/input'
 
 const createCollectionsValidator = <T>(
@@ -14,7 +14,14 @@ const createCollectionsValidator = <T>(
         return createSyntax(
             createCollectionsValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must not be empty`,
+            ),
         )
     },
 
@@ -24,7 +31,16 @@ const createCollectionsValidator = <T>(
         return createSyntax(
             createCollectionsValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} needs to have a length of at least ${min} characters. You entered ${
+                    input.value.length
+                }`,
+            ),
         )
     },
 
@@ -34,7 +50,16 @@ const createCollectionsValidator = <T>(
         return createSyntax(
             createCollectionsValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} needs to have a length of at most ${max} characters. You entered ${
+                    input.value.length
+                }`,
+            ),
         )
     },
 
@@ -45,7 +70,16 @@ const createCollectionsValidator = <T>(
         return createSyntax(
             createCollectionsValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} needs to have a length of at least ${min} and at most ${max}. You entered ${
+                    input.value.length
+                }`,
+            ),
         )
     },
 
@@ -56,7 +90,16 @@ const createCollectionsValidator = <T>(
         return createSyntax(
             createCollectionsValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} needs to have a length between ${min} and ${max}. You entered ${
+                    input.value.length
+                }`,
+            ),
         )
     },
 })

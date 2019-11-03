@@ -1,7 +1,7 @@
 import Step from '../types/step'
 import StringValidator from '../types/expressions/string-validator'
 import createSyntax from '../syntax'
-import { addValidationStep } from '../utils'
+import { addValidationStep, propertyNameOrDefault } from '../utils'
 import * as validator from 'validator'
 import { Input } from '../types/input'
 
@@ -15,7 +15,14 @@ const createStringValidator = <T>(
         return createSyntax(
             createStringValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must contain only alphanumeric characters`,
+            ),
         )
     },
 
@@ -25,7 +32,14 @@ const createStringValidator = <T>(
         return createSyntax(
             createStringValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must not be empty`,
+            ),
         )
     },
 
@@ -35,7 +49,14 @@ const createStringValidator = <T>(
         return createSyntax(
             createStringValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must have at least ${min} characters`,
+            ),
         )
     },
 
@@ -45,7 +66,14 @@ const createStringValidator = <T>(
         return createSyntax(
             createStringValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must have at most ${max} characters`,
+            ),
         )
     },
 
@@ -56,7 +84,14 @@ const createStringValidator = <T>(
         return createSyntax(
             createStringValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must have at least ${min} and at most ${max} characters`,
+            ),
         )
     },
 
@@ -67,7 +102,14 @@ const createStringValidator = <T>(
         return createSyntax(
             createStringValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must have between ${min} and ${max} characters`,
+            ),
         )
     },
 })

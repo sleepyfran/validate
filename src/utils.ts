@@ -1,10 +1,18 @@
 import Step, {
     ConditionExpression,
     Expression,
-    InfoExpression,
     OperatorExpression,
     ValidationExpression,
 } from './types/step'
+
+/**
+ * Returns the given name if it's not empty; otherwise returns a default "The
+ * input" message.
+ *
+ * @param propertyName Property name to check and return.
+ */
+export const propertyNameOrDefault = (propertyName: string) =>
+    propertyName.length === 0 ? 'The input' : propertyName
 
 /**
  * Checks if the input is a string.
@@ -63,15 +71,6 @@ export const isConditionExpression = (
 ): expression is ConditionExpression => expression.kind === 'condition'
 
 /**
- * Checks if the expression is an info expression.
- *
- * @param expression Expression to check.
- */
-export const isInfoExpression = (
-    expression: Expression,
-): expression is InfoExpression => expression.kind === 'info'
-
-/**
  * Checks if the expression is an operator expression.
  *
  * @param expression Expression to check.
@@ -79,6 +78,38 @@ export const isInfoExpression = (
 export const isOperatorExpression = (
     expression: Expression,
 ): expression is OperatorExpression => expression.kind === 'operator'
+
+/**
+ * Returns a clone of the given expression with the message updated.
+ *
+ * @param expression Expression to update.
+ * @param message Message to insert into the expression.
+ */
+export const updateMessage = (
+    expression: ValidationExpression,
+    message: string,
+): ValidationExpression => {
+    return {
+        ...expression,
+        message,
+    }
+}
+
+/**
+ * Returns a clone of the given expression with the code updated.
+ *
+ * @param expression Expression to update.
+ * @param code Code to insert into the expression.
+ */
+export const updateCode = (
+    expression: ValidationExpression,
+    code: number | string,
+): ValidationExpression => {
+    return {
+        ...expression,
+        code,
+    }
+}
 
 /**
  * Creates a new step based on the given expression and combines it with the
@@ -102,16 +133,20 @@ export const addStep = (steps: Step[], expression: Expression): Step[] => {
  * @param steps Current list of steps.
  * @param propertyName Name of the property being validated.
  * @param fulfillsValidation Whether or not the validation was successful.
+ * @param message Indicates the default message that will be showed
+ * if not `withMessage` was provided.
  */
 export const addValidationStep = (
     steps: Step[],
     propertyName: string,
     fulfillsValidation: boolean,
+    message: string,
 ): Step[] =>
     addStep(steps, {
         kind: 'validation',
         property: propertyName,
         fulfillsValidation,
+        message,
     })
 
 /**

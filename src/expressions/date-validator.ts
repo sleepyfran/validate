@@ -1,7 +1,7 @@
 import Step from '../types/step'
 import DateValidator from '../types/expressions/date-validator'
 import createSyntax from '../syntax'
-import { addValidationStep } from '../utils'
+import { addValidationStep, propertyNameOrDefault } from '../utils'
 import { Input } from '../types/input'
 
 const createDateValidator = <T>(
@@ -14,7 +14,14 @@ const createDateValidator = <T>(
         return createSyntax(
             createDateValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be after ${date}`,
+            ),
         )
     },
 
@@ -24,7 +31,14 @@ const createDateValidator = <T>(
         return createSyntax(
             createDateValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be before ${date}`,
+            ),
         )
     },
 
@@ -35,7 +49,14 @@ const createDateValidator = <T>(
         return createSyntax(
             createDateValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must be between ${pastDate} and ${futureDate}`,
+            ),
         )
     },
 
@@ -45,7 +66,12 @@ const createDateValidator = <T>(
         return createSyntax(
             createDateValidator,
             input,
-            addValidationStep(steps, input.propertyName, fulfillsValidation),
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(input.propertyName)} must be ${date}`,
+            ),
         )
     },
 })
