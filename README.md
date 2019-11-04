@@ -12,20 +12,20 @@ const user = {
 const result = validation
     .of(user)
     .property('name')
-    .alphanumeric()
-    .maxLength(10)
-    .withMessage('Who has a name that long?')
-    .withCode('ERR-100')
+        .alphanumeric()
+        .maxLength(10)
+        .withMessage('Who has a name that long?')
+        .withCode('ERR-100')
     .andProperty('age')
-    .greaterThanOrEqual(18)
-    .withMessage('Only adults allowed!')
+        .greaterThanOrEqual(18)
+        .withMessage('Only adults allowed!')
     .result()
 ```
 
 This will return a `result` object that contains different methods to retrieve the validation errors, the original input and some utility methods to combine different results. For example, calling `errors()` on the previous result will return this array:
 
 ```js
-;[
+[
     {
         message: 'name must contain only alphanumeric characters',
         code: undefined,
@@ -50,10 +50,7 @@ Thanks to TypeScript every property name, even though they're strings, are type 
 const result = validation
     .of(user)
     .property('namee') // Error: Argument of type '"namee"' is not assignable to...
-    .alphanumeric()
-    .maxLength(10)
-    .withMessage('Who has a name that long?')
-    .result()
+    ...
 ```
 
 You can also combine different results to get one array with all the different validation errors instead of creating one big validation. For example:
@@ -78,9 +75,9 @@ const result = validation
 const addressResult = validation
     .of(address)
     .property('street')
-    .minLength(5)
-    .andProperty('number')
-    .positive()
+        .minLength(5)
+        .andProperty('number')
+        .positive()
     .result()
 
 const combinedResult = result.combineWith(addressResult)
@@ -89,7 +86,7 @@ const combinedResult = result.combineWith(addressResult)
 If we call `errors()` on `combinedResult` now it will return:
 
 ```js
-;[
+[
     // ...(same as before)
     {
         message: 'number must be positive',
