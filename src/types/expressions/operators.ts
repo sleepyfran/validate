@@ -11,7 +11,7 @@ export default interface Operators<T, P> {
      *
      * @param input Input to validate.
      */
-    and<U>(input: U): Validator<U, P>
+    and<U>(input: U): Validator<U, U>
 
     /**
      * Changes the current input being validated with a property of a given

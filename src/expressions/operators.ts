@@ -8,7 +8,7 @@ const createOperators = <T, P>(
     steps: Step[],
 ): Operators<T, P> => ({
     and<U, K extends keyof U>(input: U) {
-        return createValidation(steps).of<U, P, K>(input)
+        return createValidation(steps).of<U, U, K>(input)
     },
 
     andProperty<K extends keyof T>(property: K) {
