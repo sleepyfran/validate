@@ -10,6 +10,11 @@ export default interface StringValidator<T> {
     alphanumeric(): ValidatorSyntax<StringValidator<T>, T, string>
 
     /**
+     * Checks if the input contains an specific string.
+     */
+    contains(value: string): ValidatorSyntax<StringValidator<T>, T, string>
+
+    /**
      * Checks whether the input is empty or not.
      */
     notEmpty(): ValidatorSyntax<StringValidator<T>, T, string>

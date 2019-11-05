@@ -21,6 +21,24 @@ describe('alphanumeric', () => {
     })
 })
 
+describe('contains', () => {
+    test('when input contains the specified value', () => {
+        assertSteps(syntaxSpy, assertValidationWithResult(true))
+
+        Validation.of('testing this').contains('this')
+        Validation.of('testing this').contains('t')
+        Validation.of('testing this').contains('hi')
+    })
+
+    test('when input does not contain the specified value', () => {
+        assertSteps(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of('this is a test').contains('thos')
+        Validation.of('this is a test').contains(' a tost')
+        Validation.of('this is a test').contains('u')
+    })
+})
+
 describe('notEmpty', () => {
     test('when input is not empty', () => {
         assertSteps(syntaxSpy, assertValidationWithResult(true))

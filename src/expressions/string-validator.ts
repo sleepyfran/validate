@@ -26,6 +26,23 @@ const createStringValidator = <T>(
         )
     },
 
+    contains(value) {
+        const fulfillsValidation = input.value.indexOf(value) > -1
+
+        return createSyntax(
+            createStringValidator,
+            input,
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(
+                    input.propertyName,
+                )} must contain the value '${value}'`,
+            ),
+        )
+    },
+
     notEmpty() {
         const fulfillsValidation = input.value.length > 0
 
