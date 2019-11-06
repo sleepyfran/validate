@@ -5,9 +5,15 @@ import Step, {
 import ValidatorSyntax from '../src/types/syntax'
 
 /**
+ * Dummy input to be used in tests that require some kind of input but we don't
+ * actually care about what it is.
+ */
+export const dummyInput = { propertyName: 'test', value: 'test', input: 'test' }
+
+/**
  * Asserts that the given steps has one validation step that evaluated to `result`.
  *
- * @param result Expected result
+ * @param result Expected result.
  */
 export const assertValidationWithResult = (result: boolean) => (
     steps: Step[],
@@ -22,7 +28,7 @@ export const assertValidationWithResult = (result: boolean) => (
 /**
  * Asserts that the given steps has one condition step that evaluated to `result`.
  *
- * @param result Expected result
+ * @param result Expected result.
  */
 export const assertConditionWithResult = (result: boolean) => (
     steps: Step[],

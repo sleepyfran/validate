@@ -1,10 +1,8 @@
 import createConditions from '../src/expressions/conditions'
 import * as chainEndModule from '../src/expressions/chain-end'
-import { assertConditionWithResult, assertSteps } from './utils'
+import { assertConditionWithResult, assertSteps, dummyInput } from './utils'
 
 const chainEndSpy = jest.spyOn(chainEndModule, 'default')
-
-const dummyInput = { propertyName: 'test', value: 'test', input: 'test' }
 
 describe('when', () => {
     test('adds true when condition is met', () => {
