@@ -3,12 +3,50 @@ import Step, {
     ValidationExpression,
 } from '../src/types/step'
 import ValidatorSyntax from '../src/types/syntax'
+import { ValidationError } from '../src/types/result'
+import { Input } from '../src/types/input'
 
 /**
  * Dummy input to be used in tests that require some kind of input but we don't
  * actually care about what it is.
  */
-export const dummyInput = { propertyName: 'test', value: 'test', input: 'test' }
+export const dummyInput: Input<string, string> = {
+    propertyName: 'test',
+    value: 'test',
+    input: 'test',
+}
+
+/**
+ * Dummy error to be used in tests that require some error but we don't
+ * actually care about what it is.
+ */
+export const dummyError: ValidationError = {
+    message: 'test',
+    property: 'test',
+    code: 'test',
+}
+
+/**
+ * Creates a dummy input with an specific value.
+ *
+ * @param value Value to be used.
+ */
+export const createDummyInput = (value: string) => ({
+    propertyName: 'test',
+    value,
+    input: 'test',
+})
+
+/**
+ * Creates a dummy error with an specific message.
+ *
+ * @param message Message to be used.
+ */
+export const createDummyError = (message: string) => ({
+    message,
+    property: 'test',
+    code: 'test',
+})
 
 /**
  * Asserts that the given steps has one validation step that evaluated to `result`.
