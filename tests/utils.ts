@@ -1,4 +1,7 @@
-import Step, { ValidationExpression } from '../src/types/step'
+import Step, {
+    ConditionExpression,
+    ValidationExpression,
+} from '../src/types/step'
 import ValidatorSyntax from '../src/types/syntax'
 
 /**
@@ -17,6 +20,21 @@ export const assertValidationWithResult = (result: boolean) => (
 }
 
 /**
+ * Asserts that the given steps has one condition step that evaluated to `result`.
+ *
+ * @param result Expected result
+ */
+export const assertConditionWithResult = (result: boolean) => (
+    steps: Step[],
+) => {
+    expect(steps).toHaveLength(1)
+
+    const expression = (steps[0].expression as unknown) as ConditionExpression
+    expect(expression.kind).toEqual('condition')
+    expect(expression.applyValidations).toEqual(result)
+}
+
+/**
  * Mocks the implementation of a spy and calls an assert function with the
  * steps the spy retrieved.
  *
@@ -24,6 +42,23 @@ export const assertValidationWithResult = (result: boolean) => (
  * @param assert Assert function to apply with the retrieved steps.
  */
 export const assertSteps = (
+    spy: jest.SpyInstance<ValidatorSyntax<any, any, any>>,
+    assert: (steps: Step[]) => void,
+): void => {
+    spy.mockImplementation((input, steps) => {
+        assert(steps)
+        return {} as ValidatorSyntax<any, any, any>
+    })
+}
+
+/**
+ * Mocks the implementation of a spy and calls an assert function with the
+ * steps the spy retrieved.
+ *
+ * @param spy Spy to mock.
+ * @param assert Assert function to apply with the retrieved steps.
+ */
+export const assertStepsWithCreator = (
     spy: jest.SpyInstance<ValidatorSyntax<any, any, any>>,
     assert: (steps: Step[]) => void,
 ): void => {
