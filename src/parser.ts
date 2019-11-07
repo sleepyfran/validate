@@ -1,20 +1,10 @@
-import Step, {
-    ConditionExpression,
-    OperatorExpression,
-    ValidationExpression,
-} from './types/step'
+import Step, { ConditionExpression, ValidationExpression } from './types/step'
 import { Result, ValidationError } from './types/result'
 import createResult from './expressions/result'
-import {
-    isConditionExpression,
-    isOperatorExpression,
-    isValidationExpression,
-    skip,
-} from './utils'
+import { isConditionExpression, isValidationExpression } from './utils'
 import { ParserState, PropertyResult } from './types/parser'
 
 const hasError = (propertyResult: PropertyResult) => propertyResult.errored
-const hasErrors = (state: ParserState) => state.some(step => hasError(step[1]))
 
 const parseValidationExpression = (
     state: ParserState,
@@ -40,52 +30,10 @@ const parseConditionExpression = (
     return expression.applyValidations ? state : []
 }
 
-const parseAndOperator = (
-    state: ParserState,
-    expression: OperatorExpression,
-    steps: Step[],
-    currentIndex: number,
-): ParserState => {
-    const tail = skip(steps, currentIndex)
-    const tailState = parseSteps(tail)
-
-    return state.concat(tailState)
-}
-
-const parseOrOperator = (
-    state: ParserState,
-    expression: OperatorExpression,
-    steps: Step[],
-    currentIndex: number,
-): ParserState => {
-    const tail = skip(steps, currentIndex)
-    const tailState = parseSteps(tail)
-
-    return hasErrors(state)
-        ? hasErrors(tailState)
-            ? state.concat(tailState)
-            : tailState
-        : state
-}
-
-const parseOperatorExpression = (
-    state: ParserState,
-    expression: OperatorExpression,
-    steps: Step[],
-    currentIndex: number,
-): ParserState => {
-    const operatorState =
-        expression.type === 'and'
-            ? parseAndOperator(state, expression, steps, currentIndex)
-            : parseOrOperator(state, expression, steps, currentIndex)
-
-    return [...state, ...operatorState]
-}
-
 const parseSteps = (steps: Step[]): ParserState => {
     const initialState: ParserState = []
 
-    return steps.reduce((state, step, index) => {
+    return steps.reduce((state, step) => {
         const expression = step.expression
 
         if (isValidationExpression(expression)) {
@@ -94,10 +42,6 @@ const parseSteps = (steps: Step[]): ParserState => {
 
         if (isConditionExpression(expression)) {
             return parseConditionExpression(state, expression)
-        }
-
-        if (isOperatorExpression(expression)) {
-            return parseOperatorExpression(state, expression, steps, index)
         }
 
         return initialState

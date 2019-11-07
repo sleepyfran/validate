@@ -17,18 +17,7 @@ export interface ConditionExpression {
     applyValidations: boolean
 }
 
-/**
- * Defines an operator in the validation pipeline.
- */
-export interface OperatorExpression {
-    kind: 'operator'
-    type: 'and' | 'or'
-}
-
-export type Expression =
-    | ValidationExpression
-    | ConditionExpression
-    | OperatorExpression
+export type Expression = ValidationExpression | ConditionExpression
 
 type Step = {
     expression: Expression

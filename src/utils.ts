@@ -1,7 +1,6 @@
 import Step, {
     ConditionExpression,
     Expression,
-    OperatorExpression,
     ValidationExpression,
 } from './types/step'
 
@@ -69,15 +68,6 @@ export const isValidationExpression = (
 export const isConditionExpression = (
     expression: Expression,
 ): expression is ConditionExpression => expression.kind === 'condition'
-
-/**
- * Checks if the expression is an operator expression.
- *
- * @param expression Expression to check.
- */
-export const isOperatorExpression = (
-    expression: Expression,
-): expression is OperatorExpression => expression.kind === 'operator'
 
 /**
  * Returns a clone of the given expression with the message updated.

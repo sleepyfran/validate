@@ -1,5 +1,6 @@
 import Step, {
     ConditionExpression,
+    Expression,
     ValidationExpression,
 } from '../src/types/step'
 import ValidatorSyntax from '../src/types/syntax'
@@ -38,7 +39,7 @@ export const createDummyInput = (value: string) => ({
 })
 
 /**
- * Creates a dummy error with an specific message.
+ * Creates a dummy error with a specific message.
  *
  * @param message Message to be used.
  */
@@ -46,6 +47,20 @@ export const createDummyError = (message: string) => ({
     message,
     property: 'test',
     code: 'test',
+})
+
+/**
+ * Creates a dummy validation expression with a specific result.
+ *
+ * @param result Result to be used in expression.
+ */
+export const createDummyValidationExpression = (
+    result: boolean,
+): ValidationExpression => ({
+    kind: 'validation',
+    message: '',
+    fulfillsValidation: result,
+    property: 'test',
 })
 
 /**
