@@ -1,15 +1,10 @@
 import createResult from '../src/expressions/result'
-import {
-    createDummyError,
-    createDummyInput,
-    dummyError,
-    dummyInput,
-} from './utils'
+import { createDummyError, createInput, dummyError, dummyInput } from './utils'
 
 describe('combineWith', () => {
     test('combines errors and returns new input', () => {
-        const originalInput = createDummyInput('original')
-        const otherInput = createDummyInput('other')
+        const originalInput = createInput('original')
+        const otherInput = createInput('other')
         const originalErrors = [createDummyError('original')]
         const otherErrors = [createDummyError('other')]
 
@@ -28,8 +23,8 @@ describe('combineWith', () => {
 
 describe('combineWithLeft', () => {
     test('combines errors and returns original input', () => {
-        const originalInput = createDummyInput('original')
-        const otherInput = createDummyInput('other')
+        const originalInput = createInput('original')
+        const otherInput = createInput('other')
         const originalErrors = [createDummyError('original')]
         const otherErrors = [createDummyError('other')]
 

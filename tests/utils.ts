@@ -28,11 +28,11 @@ export const dummyError: ValidationError = {
 }
 
 /**
- * Creates a dummy input with an specific value.
+ * Creates an input with an specific value.
  *
- * @param value Value to be used.
+ * @param value Value that the input will have.
  */
-export const createDummyInput = (value: string) => ({
+export const createInput = <T>(value: T) => ({
     propertyName: 'test',
     value,
     input: 'test',
@@ -62,6 +62,16 @@ export const createDummyValidationExpression = (
     fulfillsValidation: result,
     property: 'test',
 })
+
+/**
+ * Asserts that two objects are the same by stringifying and comparing them.
+ *
+ * @param actual Object we received.
+ * @param expected Object we expect.
+ */
+export const assertMatchObjects = (actual: any, expected: any) => {
+    expect(JSON.stringify(actual)).toEqual(JSON.stringify(expected))
+}
 
 /**
  * Asserts that the given steps has one validation step that evaluated to `result`.
