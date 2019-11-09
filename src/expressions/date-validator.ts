@@ -1,7 +1,11 @@
 import Step from '../types/step'
 import DateValidator from '../types/expressions/date-validator'
 import createSyntax from '../syntax'
-import { addValidationStep, propertyNameOrDefault } from '../utils'
+import {
+    addValidationStep,
+    propertyNameOrDefault,
+    validateIfDefined,
+} from '../utils'
 import { Input } from '../types/input'
 
 const createDateValidator = <T>(
@@ -61,7 +65,10 @@ const createDateValidator = <T>(
     },
 
     same(date: Date) {
-        const fulfillsValidation = input.value.valueOf() == date.valueOf()
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => input.value.valueOf() == date.valueOf(),
+        )
 
         return createSyntax(
             createDateValidator,

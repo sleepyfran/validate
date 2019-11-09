@@ -1,14 +1,28 @@
 import Validation from '../src/index'
 import * as syntaxModule from '../src/syntax'
-import { assertStepsWithCreator, assertValidationWithResult } from './utils'
+import {
+    assertStepsWithCreator,
+    assertValidationWithResult,
+    UndefinedProperty,
+} from './utils'
 
 const syntaxSpy = jest.spyOn(syntaxModule, 'default')
+
+const undefinedInput: UndefinedProperty<[]> = {}
 
 describe('empty', () => {
     test('when input is empty', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
 
         Validation.of([]).empty()
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .empty()
     })
 
     test('when input is not empty', () => {
@@ -25,6 +39,14 @@ describe('notEmpty', () => {
         Validation.of([1, 2, 3]).notEmpty()
     })
 
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .notEmpty()
+    })
+
     test('when input is empty', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
@@ -37,6 +59,14 @@ describe('minLength', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
 
         Validation.of([1, 2, 3]).minLength(1)
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .minLength(10)
     })
 
     test('when input has length less than min', () => {
@@ -59,6 +89,14 @@ describe('maxLength', () => {
         Validation.of([1, 2, 3]).maxLength(5)
     })
 
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .maxLength(10)
+    })
+
     test('when input has length greater than min', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
@@ -77,6 +115,14 @@ describe('lengthBetween', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
         Validation.of([1, 2, 3]).lengthBetween(10, 15)
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .lengthBetween(10, 20)
     })
 
     test('when input has length equal to min', () => {
@@ -109,6 +155,14 @@ describe('inclusiveLengthBetween', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
         Validation.of([1, 2, 3]).inclusiveLengthBetween(10, 15)
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .inclusiveLengthBetween(10, 15)
     })
 
     test('when input has length equal to min', () => {

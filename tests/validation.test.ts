@@ -51,6 +51,58 @@ describe('of', () => {
         })
     })
 
+    describe('correctly returns validator for undefined input type', () => {
+        test('for collections', () => {
+            const validator = createCollectionsValidator(
+                createInput((undefined as unknown) as any[]),
+                [],
+            )
+            const propertyValidator = Validation.of([1, 2, 3])
+
+            assertMatchObjects(propertyValidator, validator)
+        })
+
+        test('for dates', () => {
+            const validator = createDateValidator(
+                createInput((undefined as unknown) as Date),
+                [],
+            )
+            const propertyValidator = Validation.of(new Date())
+
+            assertMatchObjects(propertyValidator, validator)
+        })
+
+        test('for numbers', () => {
+            const validator = createNumberValidator(
+                createInput((undefined as unknown) as number),
+                [],
+            )
+            const propertyValidator = Validation.of(10)
+
+            assertMatchObjects(propertyValidator, validator)
+        })
+
+        test('for objects', () => {
+            const validator = createObjectValidator<any>(
+                createInput((undefined as unknown) as {}),
+                [],
+            )
+            const propertyValidator = Validation.of({ test: 1 })
+
+            assertMatchObjects(propertyValidator, validator)
+        })
+
+        test('for strings', () => {
+            const validator = createStringValidator(
+                createInput((undefined as unknown) as string),
+                [],
+            )
+            const propertyValidator = Validation.of('test')
+
+            assertMatchObjects(propertyValidator, validator)
+        })
+    })
+
     test('returns all validators when input is undefined', () => {
         const allValidators = createAllValidators(createInput(undefined), [])
         const validator = Validation.of(undefined)

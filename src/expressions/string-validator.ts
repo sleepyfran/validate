@@ -1,7 +1,11 @@
 import Step from '../types/step'
 import StringValidator from '../types/expressions/string-validator'
 import createSyntax from '../syntax'
-import { addValidationStep, propertyNameOrDefault } from '../utils'
+import {
+    addValidationStep,
+    propertyNameOrDefault,
+    validateIfDefined,
+} from '../utils'
 import * as validator from 'validator'
 import { Input } from '../types/input'
 
@@ -10,7 +14,9 @@ const createStringValidator = <T>(
     steps: Step[],
 ): StringValidator<T> => ({
     alphanumeric() {
-        const fulfillsValidation = validator.isAlphanumeric(input.value)
+        const fulfillsValidation = validateIfDefined(input, input =>
+            validator.isAlphanumeric(input.value),
+        )
 
         return createSyntax(
             createStringValidator,
@@ -27,7 +33,10 @@ const createStringValidator = <T>(
     },
 
     contains(value) {
-        const fulfillsValidation = input.value.indexOf(value) > -1
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => input.value.indexOf(value) > -1,
+        )
 
         return createSyntax(
             createStringValidator,
@@ -44,7 +53,10 @@ const createStringValidator = <T>(
     },
 
     empty() {
-        const fulfillsValidation = input.value.length === 0
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => input.value.length === 0,
+        )
 
         return createSyntax(
             createStringValidator,
@@ -59,7 +71,10 @@ const createStringValidator = <T>(
     },
 
     notEmpty() {
-        const fulfillsValidation = input.value.length > 0
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => input.value.length > 0,
+        )
 
         return createSyntax(
             createStringValidator,
@@ -76,7 +91,10 @@ const createStringValidator = <T>(
     },
 
     minLength(min: number) {
-        const fulfillsValidation = input.value.length > min
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => input.value.length > min,
+        )
 
         return createSyntax(
             createStringValidator,
@@ -93,7 +111,10 @@ const createStringValidator = <T>(
     },
 
     maxLength(max: number) {
-        const fulfillsValidation = input.value.length < max
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => input.value.length < max,
+        )
 
         return createSyntax(
             createStringValidator,
@@ -110,8 +131,10 @@ const createStringValidator = <T>(
     },
 
     lengthBetween(min: number, max: number) {
-        const fulfillsValidation =
-            min < input.value.length && input.value.length < max
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => min < input.value.length && input.value.length < max,
+        )
 
         return createSyntax(
             createStringValidator,
@@ -128,8 +151,10 @@ const createStringValidator = <T>(
     },
 
     inclusiveLengthBetween(min: number, max: number) {
-        const fulfillsValidation =
-            min <= input.value.length && input.value.length <= max
+        const fulfillsValidation = validateIfDefined(
+            input,
+            input => min <= input.value.length && input.value.length <= max,
+        )
 
         return createSyntax(
             createStringValidator,

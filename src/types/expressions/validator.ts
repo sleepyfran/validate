@@ -11,6 +11,8 @@ type Validator<T, P> = string extends P
     ? StringValidator<T>
     : any[] extends P
     ? CollectionValidator<T>
+    : [] extends P
+    ? CollectionValidator<T>
     : number extends P
     ? NumberValidator<T>
     : Date extends P

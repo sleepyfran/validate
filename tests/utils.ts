@@ -8,6 +8,13 @@ import { ValidationError } from '../src/types/result'
 import { Input } from '../src/types/input'
 
 /**
+ * Base interface for testing undefined properties.
+ */
+export interface UndefinedProperty<T> {
+    property?: T
+}
+
+/**
  * Dummy input to be used in tests that require some kind of input but we don't
  * actually care about what it is.
  */

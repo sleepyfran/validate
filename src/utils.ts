@@ -3,6 +3,7 @@ import Step, {
     Expression,
     ValidationExpression,
 } from './types/step'
+import { Input } from './types/input'
 
 /**
  * Returns the given name if it's not empty; otherwise returns a default "The
@@ -12,6 +13,13 @@ import Step, {
  */
 export const propertyNameOrDefault = (propertyName: string) =>
     propertyName.length === 0 ? 'The input' : propertyName
+
+/**
+ * Checks that the input is not null or undefined.
+ *
+ * @param input Input to check
+ */
+export const isNotDefined = (input: any): boolean => input === undefined
 
 /**
  * Checks if the input is a string.
@@ -138,6 +146,17 @@ export const addValidationStep = (
         fulfillsValidation,
         message,
     })
+
+/**
+ * Applies a validation only if there's a value in the input.
+ *
+ * @param input Input to check.
+ * @param validate Validation to apply on the non-null or undefined input.
+ */
+export const validateIfDefined = <T>(
+    input: Input<any, T>,
+    validate: (input: Input<any, T>) => boolean,
+) => (isNotDefined(input.value) ? false : validate(input))
 
 /**
  * Returns a new array skipping from 0 to `times` items.

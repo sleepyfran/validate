@@ -1,9 +1,15 @@
 import Validation from '../src/index'
 import * as syntaxModule from '../src/syntax'
-import { assertStepsWithCreator, assertValidationWithResult } from './utils'
+import {
+    assertStepsWithCreator,
+    assertValidationWithResult,
+    UndefinedProperty,
+} from './utils'
 import * as validator from 'validator'
 
 const syntaxSpy = jest.spyOn(syntaxModule, 'default')
+
+const undefinedInput: UndefinedProperty<string> = {}
 
 describe('alphanumeric', () => {
     test('when input is alphanumeric', () => {
@@ -11,6 +17,15 @@ describe('alphanumeric', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
 
         Validation.of('test').alphanumeric()
+    })
+
+    test('when input is undefined', () => {
+        jest.spyOn(validator, 'isAlphanumeric').mockReturnValue(false)
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .alphanumeric()
     })
 
     test('when input is not alphanumeric', () => {
@@ -30,6 +45,14 @@ describe('contains', () => {
         Validation.of('testing this').contains('hi')
     })
 
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .contains('test')
+    })
+
     test('when input does not contain the specified value', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
@@ -46,6 +69,14 @@ describe('empty', () => {
         Validation.of('').empty()
     })
 
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .empty()
+    })
+
     test('when input is not empty', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
@@ -60,6 +91,14 @@ describe('notEmpty', () => {
         Validation.of('test').notEmpty()
     })
 
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .notEmpty()
+    })
+
     test('when input is empty', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
@@ -72,6 +111,14 @@ describe('minLength', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
 
         Validation.of('tes').minLength(1)
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .minLength(10)
     })
 
     test('when input has length less than min', () => {
@@ -94,6 +141,14 @@ describe('maxLength', () => {
         Validation.of('tes').maxLength(5)
     })
 
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .maxLength(10)
+    })
+
     test('when input has length greater than min', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
@@ -112,6 +167,14 @@ describe('lengthBetween', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
         Validation.of('tes').lengthBetween(10, 15)
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .lengthBetween(0, 10)
     })
 
     test('when input has length equal to min', () => {
@@ -144,6 +207,14 @@ describe('inclusiveLengthBetween', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
 
         Validation.of('tes').inclusiveLengthBetween(10, 15)
+    })
+
+    test('when input is undefined', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of(undefinedInput)
+            .property('property')
+            .inclusiveLengthBetween(0, 10)
     })
 
     test('when input has length equal to min', () => {
