@@ -1,0 +1,21 @@
+name: Build and Test
+
+on:
+  pull_request:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Test!
+      run: yarn test
+      env:
+        CI: true
