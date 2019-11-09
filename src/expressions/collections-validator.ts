@@ -19,7 +19,7 @@ const createCollectionsValidator = <T>(
     empty() {
         const fulfillsValidation = validateIfDefined(
             input,
-            input => input.value.length === 0,
+            input => input.value.length === 1,
         )
 
         return createSyntax(
