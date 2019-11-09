@@ -43,6 +43,21 @@ const createStringValidator = <T>(
         )
     },
 
+    empty() {
+        const fulfillsValidation = input.value.length === 0
+
+        return createSyntax(
+            createStringValidator,
+            input,
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(input.propertyName)} must be empty`,
+            ),
+        )
+    },
+
     notEmpty() {
         const fulfillsValidation = input.value.length > 0
 

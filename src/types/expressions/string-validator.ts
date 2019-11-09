@@ -15,7 +15,12 @@ export default interface StringValidator<T> {
     contains(value: string): ValidatorSyntax<StringValidator<T>, T, string>
 
     /**
-     * Checks whether the input is empty or not.
+     * Checks that the input is empty.
+     */
+    empty(): ValidatorSyntax<StringValidator<T>, T, string>
+
+    /**
+     * Checks that the input is not empty.
      */
     notEmpty(): ValidatorSyntax<StringValidator<T>, T, string>
 

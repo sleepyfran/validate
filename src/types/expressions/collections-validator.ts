@@ -5,7 +5,12 @@ import ValidatorSyntax from '../syntax'
  */
 export default interface CollectionValidator<T> {
     /**
-     * Checks whether the input is empty or not.
+     * Checks that the input is empty.
+     */
+    empty(): ValidatorSyntax<CollectionValidator<T>, T, any[]>
+
+    /**
+     * Checks that the input is not empty.
      */
     notEmpty(): ValidatorSyntax<CollectionValidator<T>, T, any[]>
 

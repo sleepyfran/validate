@@ -39,6 +39,20 @@ describe('contains', () => {
     })
 })
 
+describe('empty', () => {
+    test('when input is empty', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
+
+        Validation.of('').empty()
+    })
+
+    test('when input is not empty', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of('test').empty()
+    })
+})
+
 describe('notEmpty', () => {
     test('when input is not empty', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))

@@ -8,6 +8,21 @@ const createCollectionsValidator = <T>(
     input: Input<T, any[]>,
     steps: Step[],
 ): CollectionValidator<T> => ({
+    empty() {
+        const fulfillsValidation = input.value.length === 0
+
+        return createSyntax(
+            createCollectionsValidator,
+            input,
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                `${propertyNameOrDefault(input.propertyName)} must be empty`,
+            ),
+        )
+    },
+
     notEmpty() {
         const fulfillsValidation = input.value.length > 0
 

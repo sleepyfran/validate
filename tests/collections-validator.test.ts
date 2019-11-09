@@ -4,6 +4,20 @@ import { assertStepsWithCreator, assertValidationWithResult } from './utils'
 
 const syntaxSpy = jest.spyOn(syntaxModule, 'default')
 
+describe('empty', () => {
+    test('when input is empty', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
+
+        Validation.of([]).empty()
+    })
+
+    test('when input is not empty', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of([1, 2, 3]).empty()
+    })
+})
+
 describe('notEmpty', () => {
     test('when input is not empty', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
