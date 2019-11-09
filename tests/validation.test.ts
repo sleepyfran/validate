@@ -5,6 +5,7 @@ import createDateValidator from '../src/expressions/date-validator'
 import createNumberValidator from '../src/expressions/number-validator'
 import createObjectValidator from '../src/expressions/object-validator'
 import createStringValidator from '../src/expressions/string-validator'
+import createAllValidators from '../src/expressions/all-validators'
 
 describe('of', () => {
     describe('correctly returns validator for input type', () => {
@@ -48,5 +49,12 @@ describe('of', () => {
 
             assertMatchObjects(propertyValidator, validator)
         })
+    })
+
+    test('returns all validators when input is undefined', () => {
+        const allValidators = createAllValidators(createInput(undefined), [])
+        const validator = Validation.of(undefined)
+
+        assertMatchObjects(allValidators, validator)
     })
 })

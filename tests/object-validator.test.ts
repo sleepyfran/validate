@@ -1,5 +1,6 @@
 import Validation from '../src/index'
-import { assertMatchObjects } from './utils'
+import { assertMatchObjects, createInput } from './utils'
+import createAllValidators from '../src/expressions/all-validators'
 
 describe('property', () => {
     describe('correctly returns validator for input type', () => {
@@ -47,5 +48,12 @@ describe('property', () => {
 
             assertMatchObjects(propertyValidator, stringValidator)
         })
+    })
+
+    test('returns all validators when input is optional (undefined)', () => {
+        const allValidators = createAllValidators(createInput(undefined), [])
+        const validator = Validation.of({ key: undefined }).property('key')
+
+        assertMatchObjects(allValidators, validator)
     })
 })

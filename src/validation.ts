@@ -1,12 +1,13 @@
-import { isCollection, isDate, isNumber, isString } from './utils'
+import { isCollection, isDate, isNumber, isObject, isString } from './utils'
 import createStringValidator from './expressions/string-validator'
 import createObjectValidator from './expressions/object-validator'
 import createNumberValidator from './expressions/number-validator'
 import createCollectionsValidator from './expressions/collections-validator'
 import createDateValidator from './expressions/date-validator'
+import createCommonValidator from './expressions/common-validator'
+import createAllValidators from './expressions/all-validators'
 import Step from './types/step'
 import Validation from './types/validation'
-import createCommonValidator from './expressions/common-validator'
 
 /**
  * Entry point of the validator.
@@ -35,7 +36,9 @@ const createValidation = (steps: Step[]): Validation => ({
             ? createCollectionsValidator
             : isDate(value)
             ? createDateValidator
-            : createObjectValidator
+            : isObject(value)
+            ? createObjectValidator
+            : createAllValidators
 
         // We need to cast the `createValidator` to any because otherwise TS
         // gives an error that the expression is not callable, even though it is.

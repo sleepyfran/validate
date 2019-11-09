@@ -7,13 +7,13 @@ import ObjectValidator from './object-validator'
 /**
  * Conditionally returns a validation interface depending on the given input.
  */
-type Validator<T, P> = P extends string
+type Validator<T, P> = string extends P
     ? StringValidator<T>
-    : P extends any[]
+    : any[] extends P
     ? CollectionValidator<T>
-    : P extends number
+    : number extends P
     ? NumberValidator<T>
-    : P extends Date
+    : Date extends P
     ? DateValidator<T>
     : ObjectValidator<P>
 
