@@ -15,7 +15,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    - name: Test!
-      run: yarn test
+    - name: Install and test!
+      run: yarn install && yarn test
       env:
         CI: true
