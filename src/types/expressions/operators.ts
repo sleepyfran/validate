@@ -1,4 +1,4 @@
-import Validator from './validator'
+import { ValidatorChain } from '../validation'
 
 /**
  * Defines the set of operators that can be used to combine different
@@ -11,7 +11,7 @@ export default interface Operators<T, P> {
      *
      * @param input Input to validate.
      */
-    and<U>(input: U): Validator<U, U>
+    and<U>(input: U): ValidatorChain<U, U>
 
     /**
      * Changes the current input being validated with a property of a given
@@ -20,5 +20,5 @@ export default interface Operators<T, P> {
      *
      * @param property Property of the input object to validate.
      */
-    andProperty<K extends keyof T>(property: K): Validator<T, T[K]>
+    andProperty<K extends keyof T>(property: K): ValidatorChain<T, T[K]>
 }

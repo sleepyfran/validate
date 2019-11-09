@@ -6,6 +6,7 @@ import createCollectionsValidator from './expressions/collections-validator'
 import createDateValidator from './expressions/date-validator'
 import Step from './types/step'
 import Validation from './types/validation'
+import createCommonValidator from './expressions/common-validator'
 
 /**
  * Entry point of the validator.
@@ -26,17 +27,27 @@ const createValidation = (steps: Step[]): Validation => ({
             value,
         }
 
-        if (isString(value)) {
-            return createStringValidator(validatorInput, steps) as any
-        } else if (isNumber(value)) {
-            return createNumberValidator(validatorInput, steps) as any
-        } else if (isCollection(value)) {
-            return createCollectionsValidator(validatorInput, steps) as any
-        } else if (isDate(value)) {
-            return createDateValidator(validatorInput, steps) as any
-        }
+        const createValidator = isString(value)
+            ? createStringValidator
+            : isNumber(value)
+            ? createNumberValidator
+            : isCollection(value)
+            ? createCollectionsValidator
+            : isDate(value)
+            ? createDateValidator
+            : createObjectValidator
 
-        return createObjectValidator(input, steps) as any
+        // We need to cast the `createValidator` to any because otherwise TS
+        // gives an error that the expression is not callable, even though it is.
+        // https://github.com/microsoft/TypeScript/issues/33591
+        return {
+            ...(createValidator as any)(validatorInput, steps),
+            ...createCommonValidator(
+                createValidator as any,
+                validatorInput,
+                steps,
+            ),
+        } as any
     },
 })
 

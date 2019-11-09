@@ -1,4 +1,4 @@
-import Validator from './validator'
+import { ValidatorChain } from '../validation'
 
 /**
  * Set of validations that are applicable to objects.
@@ -9,5 +9,5 @@ export default interface ObjectValidator<T> {
      *
      * @param property Property of the input to validate.
      */
-    property<K extends keyof T>(property: K): Validator<T, T[K]>
+    property<K extends keyof T>(property: K): ValidatorChain<T, T[K]>
 }
