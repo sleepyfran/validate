@@ -5,6 +5,11 @@ import ValidatorSyntax from '../syntax'
  */
 export default interface CommonValidator<V, T, P> {
     /**
+     * Adds a custom validation rule.
+     */
+    fulfills(validate: (input: T) => boolean): ValidatorSyntax<V, T, P>
+
+    /**
      * Checks that the input is defined.
      */
     notUndefined(): ValidatorSyntax<V, T, P>

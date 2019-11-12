@@ -9,6 +9,21 @@ const createCommonValidator = <V, T, P>(
     input: Input<T, P>,
     steps: Step[],
 ): CommonValidator<V, T, P> => ({
+    fulfills(validate) {
+        const fulfillsValidation = validate(input.input)
+
+        return createSyntax(
+            createValidator,
+            input,
+            addValidationStep(
+                steps,
+                input.propertyName,
+                fulfillsValidation,
+                'The input must fulfill the specified custom validation',
+            ),
+        )
+    },
+
     notUndefined() {
         const fulfillsValidation = input.value !== undefined
 

@@ -4,6 +4,20 @@ import { assertStepsWithCreator, assertValidationWithResult } from './utils'
 
 const syntaxSpy = jest.spyOn(syntaxModule, 'default')
 
+describe('fulfills', () => {
+    test('when validation is fulfilled', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
+
+        Validation.of({ prop: 'test' }).fulfills(input => input.prop === 'test')
+    })
+
+    test('when validation is not fulfilled', () => {
+        assertStepsWithCreator(syntaxSpy, assertValidationWithResult(false))
+
+        Validation.of({ prop: 'test' }).fulfills(input => input.prop === 't')
+    })
+})
+
 describe('notUndefined', () => {
     test('when input is not undefined', () => {
         assertStepsWithCreator(syntaxSpy, assertValidationWithResult(true))
