@@ -110,6 +110,22 @@ export const updateCode = (
 }
 
 /**
+ * Returns a clone of the given expression with the property updated.
+ *
+ * @param expression Expression to update.
+ * @param propertyName New name of the property of the expression.
+ */
+export const updatePropertyName = (
+    expression: ValidationExpression,
+    propertyName: string,
+): ValidationExpression => {
+    return {
+        ...expression,
+        property: propertyName,
+    }
+}
+
+/**
  * Creates a new step based on the given expression and combines it with the
  * current list of steps.
  *

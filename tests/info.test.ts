@@ -5,6 +5,58 @@ import { ValidationExpression } from '../src/types/step'
 
 const syntaxSpy = jest.spyOn(syntaxModule, 'default')
 
+describe('withPropertyName', () => {
+    test('returns input if no last step', () => {
+        assertSteps(syntaxSpy, steps => {
+            expect(steps).toHaveLength(0)
+        })
+
+        createInfo(dummyInput, []).withPropertyName('test')
+    })
+
+    test('returns input if no validation expressions are found', () => {
+        assertSteps(syntaxSpy, steps => {
+            expect(steps).toHaveLength(1)
+            expect(steps[0].expression.kind).toEqual('condition')
+        })
+
+        createInfo(dummyInput, [
+            {
+                expression: {
+                    kind: 'condition',
+                    applyValidations: false,
+                },
+            },
+        ]).withPropertyName('test')
+    })
+
+    test('modifies the property name if the previous expression is a validation', () => {
+        assertSteps(syntaxSpy, steps => {
+            expect(steps).toHaveLength(1)
+
+            const validationExpression = (steps[0]
+                .expression as unknown) as ValidationExpression
+
+            expect(validationExpression.kind).toEqual('validation')
+            expect(validationExpression.property).toEqual(
+                'evenMoreWonderfulProperty',
+            )
+        })
+
+        createInfo(dummyInput, [
+            {
+                expression: {
+                    kind: 'validation',
+                    message: '',
+                    code: '',
+                    fulfillsValidation: false,
+                    property: 'wonderfulProperty',
+                },
+            },
+        ]).withPropertyName('evenMoreWonderfulProperty')
+    })
+})
+
 describe('withCode', () => {
     test('returns input if no last step', () => {
         assertSteps(syntaxSpy, steps => {
