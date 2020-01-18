@@ -1,3 +1,5 @@
+import { Severity } from './severity'
+
 /**
  * Defines a validation and whether it has passed or not.
  */
@@ -7,6 +9,7 @@ export interface ValidationExpression {
     property: string
     message: string
     code?: number | string
+    severity?: Severity
 }
 
 /**

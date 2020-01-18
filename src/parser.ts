@@ -18,6 +18,7 @@ const parseValidationExpression = (
                 errored: !expression.fulfillsValidation,
                 message: expression.message,
                 code: expression.code,
+                severity: expression.severity,
             },
         ],
     ]
@@ -62,6 +63,7 @@ export const parse = <T>(input: T, steps: Step[]): Result<T> => {
         .map(([property, error]) => ({
             message: error.message,
             code: error.code,
+            severity: error.severity,
             property,
         }))
 

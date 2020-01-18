@@ -1,3 +1,5 @@
+import { Severity } from './severity'
+
 /**
  * Defines a validation error that may include the error code, error message
  * or the property that produced the error.
@@ -6,6 +8,7 @@ export interface ValidationError {
     code?: number | string
     message: string
     property: string
+    severity?: Severity
 }
 
 /**

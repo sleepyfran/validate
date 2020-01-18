@@ -1,5 +1,6 @@
 import Validator from './validator'
 import ValidatorSyntax from '../syntax'
+import { Severity } from '../severity'
 
 export default interface Info<T, P> {
     /**
@@ -27,4 +28,11 @@ export default interface Info<T, P> {
      * @param message Error message to add to the validation.
      */
     withMessage(message: string): ValidatorSyntax<Validator<T, P>, T, P>
+
+    /**
+     * Updates the default severity with the one provided.
+     *
+     * @param severity Severity to add to the validation chain.
+     */
+    withSeverity(severity: Severity): ValidatorSyntax<Validator<T, P>, T, P>
 }

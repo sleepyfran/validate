@@ -4,6 +4,7 @@ import Step, {
     ValidationExpression,
 } from './types/step'
 import { Input } from './types/input'
+import { Severity } from './types/severity'
 
 /**
  * Returns the given name if it's not empty; otherwise returns a default "The
@@ -122,6 +123,22 @@ export const updatePropertyName = (
     return {
         ...expression,
         property: propertyName,
+    }
+}
+
+/**
+ * Returns a clone of the given expression with the severity updated.
+ *
+ * @param expression Expression to update.
+ * @param severity New severity of the expression.
+ */
+export const updateSeverity = (
+    expression: ValidationExpression,
+    severity: Severity,
+): ValidationExpression => {
+    return {
+        ...expression,
+        severity,
     }
 }
 

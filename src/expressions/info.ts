@@ -6,6 +6,7 @@ import {
     updateCode,
     updateMessage,
     updatePropertyName,
+    updateSeverity,
 } from '../utils'
 import createValidation from '../validation'
 import Validator from '../types/expressions/validator'
@@ -65,6 +66,11 @@ const createInfo = <T, P>(input: Input<T, P>, steps: Step[]): Info<T, P> => ({
     withMessage: message =>
         updateLastStepWithInfo(input, steps, expression =>
             updateMessage(expression, message),
+        ),
+
+    withSeverity: severity =>
+        updateLastStepWithInfo(input, steps, expression =>
+            updateSeverity(expression, severity),
         ),
 })
 
