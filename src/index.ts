@@ -1,4 +1,6 @@
 import createValidation from './validation'
 
 export default createValidation([])
-export { Result } from './types/result'
+
+export { Severity } from './types/severity'
+export { ValidationError, Result } from './types/result'
