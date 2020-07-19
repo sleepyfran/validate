@@ -127,7 +127,7 @@ After building you can execute the tests by simply running `yarn test`.
 
 ### Can you add _XYZ_ validator/feature?
 
-This library was created specifically for [Duets](https://github.com/duets/game) and it may not cover every use-case. If you want a feature to be added, feel free to [open an issue](https://github.com/sleepyfran/validum/issues) and we'll discuss the possibility there.
+Yes! If you want a feature to be added, feel free to [open an issue](https://github.com/sleepyfran/validum/issues) and we'll discuss the possibility there.
 
 ### How can I contribute?
 
